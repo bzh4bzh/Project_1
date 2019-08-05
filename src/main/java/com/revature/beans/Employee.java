@@ -18,7 +18,7 @@ public class Employee {
 		this.id = id;
 		this.reportsTo = reportsTo;
 		this.departmentHead = departmentHead;
-		BenCon = benCon;
+		this.BenCon = benCon;
 		this.name = name;
 		this.username = username;
 		this.password = password;
@@ -31,6 +31,8 @@ public class Employee {
 		this.name = name;
 		this.username = username;
 		this.password = password;
+		this.departmentHead = 0;
+		this.BenCon = 0;
 	}
 
 	public int getId() {
@@ -71,6 +73,30 @@ public class Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getDirectSup() {
+		return directSup;
+	}
+
+	public void setDirectSup(int directSup) {
+		this.directSup = directSup;
+	}
+
+	public int getDepartmentHead() {
+		return departmentHead;
+	}
+
+	public void setDepartmentHead(int departmentHead) {
+		this.departmentHead = departmentHead;
+	}
+
+	public int getBenCon() {
+		return BenCon;
+	}
+
+	public void setBenCon(int benCon) {
+		BenCon = benCon;
 	}
 	
 	
