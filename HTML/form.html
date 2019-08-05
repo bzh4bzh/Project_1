@@ -14,7 +14,7 @@
       background-color: #ff6b21;
       text-align: left;
       padding-left: 12vw;
-      padding-top: 12vh;
+      padding-top: 11vh;
       justify-content: left;
       align-items: left;
       border-radius: 1em;
@@ -27,9 +27,9 @@
   <form id="myForm" action="?" method="post">
     <input type="text" id="name" placeholder="FirstName LastName" required/>
     <br>
-    <input type="date" id="date" size="100" required/>
+    <input type="date" id="date" size="100" title="Enter Start Date" required/>
     <br>
-    <input type="time" id="time" required/>
+    <input type="time" id="time" title="Enter Start Time e.g. 12:00 AM" required/>
     <br>
     <select id="type" required>
       <option>Certification</option>
@@ -43,16 +43,16 @@
     <textarea form="myForm" rows="2" cols="20" id="location" placeholder="Address
 City, State, ZIP" required></textarea> <!--Don't touch this line-->
     <br>
-    <input type="number" min="0" step=".01" id="cost" placeholder="$0.00" required>
+    <input type="number" min="0" step=".01" id="cost" placeholder="$0.00" title="Total Cost" required>
     <br>
-    <select id="gradingFormat" required>
+    <select id="gradingFormat" title="Grading Format" required>
       <option>Letter</option>
       <option>Percentage</option>
       <option>Pass/Fail</option>
       <option>Other</option>
     </select>
     <br>
-      <input type="text" id="passingGrade" placeholder="Passing grade?" required>
+      <input type="text" id="passingGrade" placeholder="Passing grade?" title="What is the passing grade for this course?" required>
     <br>
     <textarea form="myForm" id="justification" placeholder="Work-Related Justification" required></textarea>
     <br>
