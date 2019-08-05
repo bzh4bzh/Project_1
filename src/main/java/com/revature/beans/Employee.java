@@ -35,6 +35,12 @@ public class Employee {
 		this.BenCon = 0;
 	}
 
+	
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return id;
 	}
