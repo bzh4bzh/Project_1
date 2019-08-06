@@ -4,9 +4,16 @@ CREATE TABLE employee(
     username VARCHAR2(50) UNIQUE,
     pass VARCHAR2(50) NOT NULL,
     reportsto NUMBER,
+    department NUMBER,
     authority NUMBER, 
+    remainingBal number default 1000,
     CONSTRAINT authority_check CHECK (authority>=0 AND authority<4)
 );
+
+
+insert into employee values(1,'Hope Eshem','HESHEM','p4$$w0rd',3,1,0);
+insert into employee values(2,'Mark Worthwile','MWORTH','p4$$',6,2,0);
+insert into employee values(3,'Karlie Slider','KSLIDE','w0rd',9,1,1);
 
 create table request(
     requestID number primary key,
@@ -36,6 +43,11 @@ create table attachment(
     doc blob
 );
 
+create table department(
+    deptid number,
+    deptname varchar2(20)
+);
+
 create table eventType(
     eventid number primary key,
     eventtype varchar2(20),
@@ -47,15 +59,7 @@ create table gradingScale(
     gradename varchar2(10)
 );
 
-create sequence empseq;
 create sequence recseq;
-
-CREATE OR REPLACE TRIGGER useridmaker
-BEFORE INSERT ON employee
-FOR EACH ROW
-BEGIN
-    SELECT empseq.NEXTVAL INTO: NEW.userid FROM dual;
-END;
 
 CREATE OR REPLACE TRIGGER recidmaker
 BEFORE INSERT ON request
