@@ -7,9 +7,10 @@ public class Employee {
 	private int departmentHead;		//0 no, 1 YES
 	private int BenCon;				//0 not, 1 YES
 	private String name;			//name
-	private String username;
-	private String password;
-	private int department;
+	private String username;		//username
+	private String password;		//pword
+	private int department;			// type of department
+	private double remainingBalance;
 	
 	
 	
