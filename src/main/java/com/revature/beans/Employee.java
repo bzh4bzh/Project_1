@@ -9,11 +9,20 @@ public class Employee {
 	private String name;			//name
 	private String username;
 	private String password;
+	private int department;
 	
 	
 	
+	public int getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(int department) {
+		this.department = department;
+	}
+
 	public Employee(int id, int reportsTo, int departmentHead, int benCon, String name, String username,
-			String password) {
+			String password, int department) {
 		super();
 		this.id = id;
 		this.reportsTo = reportsTo;
@@ -22,6 +31,7 @@ public class Employee {
 		this.name = name;
 		this.username = username;
 		this.password = password;
+		this.department = department;
 	}
 
 	public Employee(int id, int reportsTo, String name, String username, String password) {
