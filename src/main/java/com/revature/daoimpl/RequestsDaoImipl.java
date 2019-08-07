@@ -12,15 +12,26 @@ import com.revature.util.ConnFactory;
 public class RequestsDaoImipl implements RequestsDao{
 	public static ConnFactory cf= ConnFactory.getInstance();
 	@Override
-	public void insertRequest(int requestid, int useid, String eventname, String eventlocation, String eventdate, String eventdescription, int eventtype, int gradingscale, String passinggrade, String justification, double eventcost, double reimbursement, int status) {
+	public void insertRequest(int requestid, int userID, String name, String location, String date, String description, int type, int gradingScale, String passingGrade, String justification, double cost, double reimbursement, int status) {
 		Connection conn = cf.getConnection();
 		String sql = "{ call insertRec(?,?,?,?,?,?,?,?,?,?,?)";
 		CallableStatement call;
 		try {
 			call = conn.prepareCall(sql);
-			call.setInt(1, id);
-			call.setDouble(2, bal);
-			call.executeQuery();
+			call.setInt(1, requestid);
+			call.setInt(2, userID);
+			call.setString(3, name);
+			call.setString(4, location);
+			call.setString(5, date);
+			call.setString(6, description);
+			call.setInt(7, type);
+			call.setInt(8, gradingScale);
+			call.setString(9, passingGrade);
+			call.setString(10, justification);
+			call.setDouble(11, cost);
+			call.setDouble(11, reimbursement);
+			call.setInt(11, status);
+			call.execute();
 			
 		} catch (SQLException e) {
 			//

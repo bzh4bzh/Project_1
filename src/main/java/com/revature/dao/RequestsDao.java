@@ -2,7 +2,7 @@ package com.revature.dao;
 
 public interface RequestsDao {
 	
-	public abstract void insertRequest(int requestid, int useid, String eventname, String eventlocation, String eventdate, String eventdescription, int eventtype, int gradingscale, String passinggrade, String justification, double eventcost, double reimbursement, int status); 
+	public abstract void insertRequest(int requestid, int userID, String name, String location, String date, String description, int type, int gradingScale, String passingGrade, String justification, double cost, double reimbursement, int status); 
 	public abstract String getApplicationStatus(int id);
 	public abstract String getPendingSuper();
 	public abstract String getPendingDeptHead();
