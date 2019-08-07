@@ -3,9 +3,7 @@ package com.revature.beans;
 public class Employee {
 	private int id;					//unique id number
 	private int reportsTo;			//unique id number of immidiate supervisor
-	private int directSup;			//0 no, 1 YES
-	private int departmentHead;		//0 no, 1 YES
-	private int BenCon;				//0 not, 1 YES
+	private int authority;			//user authourity
 	private String name;			//name
 	private String username;		//username
 	private String password;		//pword
@@ -22,17 +20,17 @@ public class Employee {
 		this.department = department;
 	}
 
-	public Employee(int id, int reportsTo, int departmentHead, int benCon, String name, String username,
-			String password, int department) {
+	public Employee(int id, String name, String username,
+			String password, int reportsTo, int authority, int department, double remainingBal) {
 		super();
 		this.id = id;
 		this.reportsTo = reportsTo;
-		this.departmentHead = departmentHead;
-		this.BenCon = benCon;
+		this.authority = authority; 
 		this.name = name;
 		this.username = username;
 		this.password = password;
 		this.department = department;
+		this.remainingBalance = remainingBal;
 	}
 
 	public Employee(int id, int reportsTo, String name, String username, String password) {
@@ -42,8 +40,7 @@ public class Employee {
 		this.name = name;
 		this.username = username;
 		this.password = password;
-		this.departmentHead = 0;
-		this.BenCon = 0;
+
 	}
 
 	
@@ -92,29 +89,23 @@ public class Employee {
 		this.password = password;
 	}
 
-	public int getDirectSup() {
-		return directSup;
+	public int getAuthority() {
+		return authority;
 	}
 
-	public void setDirectSup(int directSup) {
-		this.directSup = directSup;
+	public void setAuthority(int authority) {
+		this.authority = authority;
 	}
 
-	public int getDepartmentHead() {
-		return departmentHead;
+	public double getRemainingBalance() {
+		return remainingBalance;
 	}
 
-	public void setDepartmentHead(int departmentHead) {
-		this.departmentHead = departmentHead;
+	public void setRemainingBalance(double remainingBalance) {
+		this.remainingBalance = remainingBalance;
 	}
 
-	public int getBenCon() {
-		return BenCon;
-	}
-
-	public void setBenCon(int benCon) {
-		BenCon = benCon;
-	}
+	
 	
 	
 	

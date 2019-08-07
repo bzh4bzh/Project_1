@@ -8,5 +8,5 @@ public interface RequestsDao {
 	public abstract String getPendingDeptHead();
 	public abstract String getPendingBenCo();
 	public abstract String updateStatus();
-	public abstract String updateMoney();
+	public abstract String updateReimbursement();
 }
