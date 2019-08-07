@@ -11,13 +11,13 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>LogoutServelet</display-name>
-    <servlet-name>LogoutServelet</servlet-name>
-    <servlet-class>com.revature.servlet.LogoutServelet</servlet-class>
+    <display-name>LoginServelet</display-name>
+    <servlet-name>LoginServelet</servlet-name>
+    <servlet-class>com.revature.servlet.LoginServelet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LogoutServelet</servlet-name>
-    <url-pattern>/logout</url-pattern>
+    <servlet-name>LoginServelet</servlet-name>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -28,5 +28,15 @@
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>FormServlet</display-name>
+    <servlet-name>FormServlet</servlet-name>
+    <servlet-class>com.revature.servlet.FormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FormServlet</servlet-name>
+    <url-pattern>/form</url-pattern>
   </servlet-mapping>
 </web-app>
