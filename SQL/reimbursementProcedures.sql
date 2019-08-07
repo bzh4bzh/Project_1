@@ -59,7 +59,7 @@ END;
 /
 CREATE OR REPLACE PROCEDURE updateReimburse(recid in number, bal in number)
 AS BEGIN
-update request set reimbursement=bal where requestid=recid;
+update request set reimbursment=bal where requestid=recid;
 commit;
 END;
 /
