@@ -10,11 +10,6 @@ CREATE TABLE employee(
     CONSTRAINT authority_check CHECK (authority>=0 AND authority<4)
 );
 
-
-insert into employee values(1,'Hope Eshem','HESHEM','p4$$w0rd',3,1,0);
-insert into employee values(2,'Mark Worthwile','MWORTH','p4$$',6,2,0);
-insert into employee values(3,'Karlie Slider','KSLIDE','w0rd',9,1,1);
-
 create table request(
     requestID number primary key,
     userID number,
@@ -28,7 +23,7 @@ create table request(
     justification varchar2(200),
     eventcost number,
     reimbursment number,
-    status number, 
+    status number default 0, 
     foreign key (userid) references employee(userid),
     constraint check_status check (status>=-1 and status<4)
 );
