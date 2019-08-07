@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--Use the script in this file to mark urgent requests in red-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Testing dates</title>
+	<style type="text/css">
+		table{
+			border-collapse:collapse;
+			
+		}
+		table tr td{
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<table id="table">
+		<tr>
+			<td>20-AUG-2019</td><td>A</td>
+		</tr>
+		<tr>
+			<td>06-SEP-2019</td><td>B</td>
+		</tr>
+		<tr>
+			<td>06-OCT-2019</td><td>C</td>
+		</tr>
+		<tr>
+			<td>06-NOV-2019</td><td>D</td>
+		</tr>
+		<tr>
+			<td>06-DEC-2019</td><td>E</td>
+		</tr>
+	<script>
+		let table = document.getElementById("table");
+		for (var i = 0, row; row = table.rows[i]; i++){
+				let tableDate = row.cells[0].innerHTML; //Change column index to match ResultSet
+				tableDate = new Date(tableDate);
+				tableDate.setFullYear(Math.abs(tableDate.getFullYear())); //Set year to be positive year beacuse it gets parsed as a negative year
+				let curDate = new Date();
+				curDate.setHours(0,0,0,0); //Set to midnight
+				if (tableDate-curDate <= 86400000*14) {//ms per day; 14 days before
+						row.style.color="red";
+					}
+					else{break;} //can remove this else
+			}
+	</script>
+</body>
+</html>
