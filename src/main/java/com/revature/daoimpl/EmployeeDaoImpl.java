@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDao;
@@ -56,8 +55,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public double getRemainingBalance(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = cf.getConnection();
+		String sql = "Select remainingBal from employee where userid =?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			return rs.getDouble(1);
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	@Override
