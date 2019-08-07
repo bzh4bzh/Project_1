@@ -33,7 +33,7 @@ public class FormServlet extends HttpServlet {
 		PrintWriter pw= response.getWriter();
 		String rjson;
 		try {
-			rjson=map.writeValueAsString();
+			//rjson=map.writeValueAsString();
 			//response.setContentType("application/json");
 			//response.setCharacterEncoding("UTF-8");
 			rdi.insertRequest(id)
