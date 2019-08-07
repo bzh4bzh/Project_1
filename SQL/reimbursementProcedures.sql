@@ -1,4 +1,5 @@
-CREATE OR REPLACE PROCEDURE showMyRequests(useid IN NUMBER)
+---USEID IS JUST THE PARAMETER VERSION OF USERID 
+/*CREATE OR REPLACE PROCEDURE showMyRequests(useid IN NUMBER)
 AS BEGIN
 select * from request where request.userid=useid order by eventdate;
 COMMIT;
@@ -22,35 +23,37 @@ select * from request order by eventdate;
 COMMIT;
 END;
 /
+*/
 
 
 
 
+/*authenticates password*/
+--select pass from employee where username=uname;
 
+/*gets UserID*/
+--Select userid from employee where username=uname;
 
+/*gets title*/
+--Select titlename from title inner join employee on title.titleid=employee.authority where employee.userid=8;
 
-CREATE OR REPLACE PROCEDURE authenticate(uname IN varchar2)
+/*gets department name*/
+--Select deptname from title inner join employee on title.titleid=employee.authority where employee.userid=useid;
+
+CREATE OR REPLACE PROCEDURE insertRec(useId number, ename varchar2, eloc varchar2,
+    edate date, edesc varchar2, etype number, gscale number, pgrade varchar2, justifi varchar2,
+    ecost number, reimburs number)
 AS BEGIN
-select pass from employee where username=uname;
-COMMIT;
+insert into request(userID, eventname, eventlocation, eventdate, eventdescription, eventtype, gradingScale,
+            passingGrade, justification, eventcost, reimbursment) values (useId, ename, eloc, edate, edesc, etype, gscale, pgrade, 
+            justifi, ecost, reimburs);
 END;
 /
 
-CREATE OR REPLACE PROCEDURE getUID(uname IN varchar2)
+CREATE OR REPLACE PROCEDURE updateRemains(useid in number, bal in number)
 AS BEGIN
-Select userid from employee where username=uname;
-COMMIT;
+update employee set remainingBal=bal where userid=useid;
+commit;
 END;
 /
-
-CREATE OR REPLACE PROCEDURE getAuthority(useid IN number)
-AS BEGIN
-Select titlename from title inner join employee on title.titleid=employee.authority where employee.userid=useid;
---COMMIT;
-END;
-/
-
-
-
-
 
