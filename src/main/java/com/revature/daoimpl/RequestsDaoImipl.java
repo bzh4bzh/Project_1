@@ -44,7 +44,7 @@ public class RequestsDaoImipl implements RequestsDao{
 	}
 
 	@Override
-	public String updateMoney() {
+	public String updateReimbursement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
