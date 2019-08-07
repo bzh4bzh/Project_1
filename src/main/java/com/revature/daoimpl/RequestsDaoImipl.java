@@ -14,7 +14,7 @@ public class RequestsDaoImipl implements RequestsDao{
 	@Override
 	public void insertRequest(int requestid, int userID, String name, String location, String date, String description, int type, int gradingScale, String passingGrade, String justification, double cost, double reimbursement, int status) {
 		Connection conn = cf.getConnection();
-		String sql = "{ call insertRec(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "{ call insertRec(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		CallableStatement call;
 		try {
 			call = conn.prepareCall(sql);
@@ -29,8 +29,8 @@ public class RequestsDaoImipl implements RequestsDao{
 			call.setString(9, passingGrade);
 			call.setString(10, justification);
 			call.setDouble(11, cost);
-			call.setDouble(11, reimbursement);
-			call.setInt(11, status);
+			call.setDouble(12, reimbursement);
+			call.setInt(13, status);
 			call.execute();
 			
 		} catch (SQLException e) {
