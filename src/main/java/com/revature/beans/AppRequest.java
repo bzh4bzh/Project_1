@@ -15,7 +15,8 @@ public class AppRequest {
 	private int gradingScale;
 	// default is C
 	private String passingGrade;
-	private int cost;
+	private double cost;
+	private double reimbursement;
 	/*
 	 * -1 to 4 for pending status -1: denied 0: pending @ Direct Supervisro 1:
 	 * pending @ Dept Head 2: pending @ Ben Co 3:approved
@@ -27,8 +28,8 @@ public class AppRequest {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AppRequest(int requestid, int userID, String name, String location, String description, String date,
-			int type, String justification, int gradingScale, int cost, int status, String passingGrade) {
+	public AppRequest(int requestid, int userID, String name, String location,  String date, String description,
+			int type, int gradingScale, String passingGrade ,String justification,  double cost, double reimbursement, int status) {
 		super();
 		Requestid = requestid;
 		this.userID = userID;
@@ -43,11 +44,38 @@ public class AppRequest {
 		this.cost = cost;
 		this.status = status;
 	}
+		
+		
 
 	public AppRequest(int requestid, int userID, String name, String location, String description, String date,
-			int type, String justification, int cost, int gradingScale, int status) {
-		this(requestid, userID, name, location, description, date, type, justification, gradingScale, cost, status,
-				"C");
+			int type, String justification, int gradingScale, String passingGrade, double cost, double reimbursement,
+			int status) {
+		super();
+		Requestid = requestid;
+		this.userID = userID;
+		this.name = name;
+		this.location = location;
+		this.description = description;
+		this.date = date;
+		this.type = type;
+		this.justification = justification;
+		this.gradingScale = gradingScale;
+		this.passingGrade = passingGrade;
+		this.cost = cost;
+		this.reimbursement = reimbursement;
+		this.status = status;
+	}
+
+	public double getReimbursement() {
+		return reimbursement;
+	}
+
+	public void setReimbursement(double reimbursement) {
+		this.reimbursement = reimbursement;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
 	public int getRequestid() {
@@ -138,12 +166,8 @@ public class AppRequest {
 		this.passingGrade = passingGrade;
 	}
 
-	public int getCost() {
+	public double getCost() {
 		return cost;
-	}
-
-	public void setCost(int cost) {
-		this.cost = cost;
 	}
 
 }
