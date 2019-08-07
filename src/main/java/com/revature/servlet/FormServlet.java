@@ -36,29 +36,15 @@ public class FormServlet extends HttpServlet {
 		String just= request.getParameter("justification") ;
 		double cost= Double.parseDouble(request.getParameter("cost"));
 		
+		//
+		double reim=cost*(edi.reimPercent(type))/100;
+				(edi.getRemainingBalance(id)-edi.getPendingBalance());
 		
-//		double reim=cost*(edi.reimPercent(type))/100;
-//				(edi.getRemainingBalance(id)-edi.getPendingBalance());
-//		
-//
-//		RequestsDaoImipl rdi=new RequestsDaoImipl();
-//		rdi.insertRequest(id, name, loc, date, desc, type, gscale, pgrade, just, cost, reim);
-//		
+
+		RequestsDaoImipl rdi=new RequestsDaoImipl();
+		rdi.insertRequest(id, name, loc, date, desc, type, gscale, pgrade, just, cost, reim);
+		
 		PrintWriter pw= response.getWriter();
-//<<<<<<< HEAD
-//		String rjson;
-//		try {
-//			//rjson=map.writeValueAsString();
-//			//response.setContentType("application/json");
-//			//response.setCharacterEncoding("UTF-8");
-//			rdi.insertRequest(id)
-//			pw.print(rjson);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//=======
-//>>>>>>> f936f8996a33add5d93e448ab73e17d751f45721
 		
 		RequestDispatcher rd = request.getRequestDispatcher("home.html");
 		rd.forward(request, response);
