@@ -64,7 +64,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			return rs.getDouble(1);
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
