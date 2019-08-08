@@ -16,17 +16,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public int getUserID(String username) {
 		Connection conn = cf.getConnection();
-		String sql = "{ call getUID(?)";
-		CallableStatement call;
+		String sql = "Select userid from employee where username=?";
+		PreparedStatement ps;
 		try {
-			call = conn.prepareCall(sql);
-			call.setString(1, username);
-			ResultSet rs = call.executeQuery();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			//
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
@@ -87,7 +87,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			call.setInt(1, id);
 			call.setDouble(2, bal);
 			call.executeQuery();
-			
+
 		} catch (SQLException e) {
 			//
 			e.printStackTrace();
@@ -136,8 +136,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
-			rs.next();
-			return rs.getString(1);
+			if (rs.next()) {
+				return rs.getString(1);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

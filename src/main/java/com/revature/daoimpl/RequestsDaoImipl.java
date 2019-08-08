@@ -83,13 +83,13 @@ public class RequestsDaoImipl implements RequestsDao {
 		return null;
 	}
 
-	private String pendingTableToHtmlString(ArrayList<AppRequest> aar) {
-		StringBuffer sb = new StringBuffer();
-		sb.append("<!DOCTYPE html><html><head><title></title></head><body><div><table id=\"table\">");
-		for(AppRequest a: aar) {
-			
-		}
-	}
+//	private String pendingTableToHtmlString(ArrayList<AppRequest> aar) {
+//		StringBuffer sb = new StringBuffer();
+//		sb.append("<!DOCTYPE html><html><head><title></title></head><body><div><table id=\"table\">");
+//		for(AppRequest a: aar) {
+//			
+//		}
+//	}
 	@Override
 	public String getPendingDeptHead(int userID) {
 		// TODO Auto-generated method stub

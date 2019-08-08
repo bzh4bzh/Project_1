@@ -37,12 +37,12 @@ public class FormServlet extends HttpServlet {
 		double cost= Double.parseDouble(request.getParameter("cost"));
 		
 		//
-		double reim=cost*(edi.reimPercent(type))/100;
-				(edi.getRemainingBalance(id)-edi.getPendingBalance());
-		
-
-		RequestsDaoImipl rdi=new RequestsDaoImipl();
-		rdi.insertRequest(id, name, loc, date, desc, type, gscale, pgrade, just, cost, reim);
+//		double reim=cost*(edi.reimPercent(type))/100;
+//				(edi.getRemainingBalance(id)-edi.getPendingBalance());
+//		
+//
+//		RequestsDaoImipl rdi=new RequestsDaoImipl();
+//		rdi.insertRequest(id, name, loc, date, desc, type, gscale, pgrade, just, cost, reim);
 		
 		PrintWriter pw= response.getWriter();
 		
