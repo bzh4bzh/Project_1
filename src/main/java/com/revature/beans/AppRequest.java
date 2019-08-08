@@ -28,10 +28,9 @@ public class AppRequest {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AppRequest(int requestid, int userID, String name, String location,  String date, String description,
-			int type, int gradingScale, String passingGrade ,String justification,  double cost, double reimbursement, int status) {
+	public AppRequest(int userID, String name, String location,  String date, String description,
+			int type, int gradingScale, String passingGrade ,String justification,  double cost, double reimbursement) {
 		super();
-		Requestid = requestid;
 		this.userID = userID;
 		this.name = name;
 		this.location = location;
@@ -42,16 +41,15 @@ public class AppRequest {
 		this.gradingScale = gradingScale;
 		this.passingGrade = passingGrade;
 		this.cost = cost;
-		this.status = status;
+		this.status = 0;
 	}
 		
 		
 
-	public AppRequest(int requestid, int userID, String name, String location, String description, String date,
+	public AppRequest( int userID, String name, String location, String description, String date,
 			int type, String justification, int gradingScale, String passingGrade, double cost, double reimbursement,
 			int status) {
 		super();
-		Requestid = requestid;
 		this.userID = userID;
 		this.name = name;
 		this.location = location;
