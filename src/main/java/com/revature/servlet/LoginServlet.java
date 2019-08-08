@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("In doGet of LoginServlet");
 		RequestDispatcher rd = request.getRequestDispatcher("login.html");
 		rd.forward(request, response);
+		
 	}
 
 	/**
@@ -58,7 +59,6 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("invalidCredentials.html").forward(request, response);
 				out.print("<h1>sorry, username or password error!</h1>"); // its just password error
 			} else if (auth >= 1) {
-				// CHANGE THIS TO FORWARD TO TABLE.HTML AFTER PULLING FROM BEN'S BRANCH
 				request.getRequestDispatcher("table.html").forward(request, response);
 			} else {
 				request.getRequestDispatcher("home.html").forward(request, response);
