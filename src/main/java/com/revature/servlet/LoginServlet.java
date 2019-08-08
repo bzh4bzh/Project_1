@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 				out.print("<h1>sorry, username or password error!</h1>"); // its just password error
 			} else if (auth >= 1) {
 				// CHANGE THIS TO FORWARD TO TABLE.HTML AFTER PULLING FROM BEN'S BRANCH
-				request.getRequestDispatcher("temp.html").forward(request, response);
+				request.getRequestDispatcher("table.html").forward(request, response);
 			} else {
 				request.getRequestDispatcher("home.html").forward(request, response);
 			}
