@@ -1,3 +1,6 @@
+--select sum(reimbursment) from request where userid=?;
+--select remainingBal from employee where userid=?;
+
 ---USEID IS JUST THE PARAMETER VERSION OF USERID 
 /*CREATE OR REPLACE PROCEDURE showMyRequests(useid IN NUMBER)
 AS BEGIN
