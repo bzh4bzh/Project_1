@@ -42,7 +42,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			return "NOV";
 		case 12:
 			return "DEC";
-		
+
 		}
 		return null;
 	}
@@ -56,7 +56,7 @@ public class RequestsDaoImipl implements RequestsDao {
 		String[] split = date.split("-");
 		StringBuffer sb = new StringBuffer();
 		sb.append(split[2] + "-");
-		sb.append(this.month(split[1])+"-");
+		sb.append(this.month(split[1]) + "-");
 		sb.append(split[0]);
 		date = sb.toString();
 		System.out.println("the date is this now " + date);
@@ -68,7 +68,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			call.setString(2, name);
 			call.setString(3, location);
 			call.setString(4, date);
-			//System.out.println("The date looks like this " + date);
+			// System.out.println("The date looks like this " + date);
 			call.setString(5, description);
 			call.setInt(6, type);
 			call.setInt(7, gradingScale);
@@ -114,7 +114,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Date a = rs.getDate(4);
-				
+
 				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), a.toString(), rs.getString(5),
 						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
 						rs.getDouble(11), rs.getInt(12)));
@@ -140,9 +140,9 @@ public class RequestsDaoImipl implements RequestsDao {
 			ps.setInt(1, userID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
-						rs.getDouble(11), rs.getInt(12)));
+				aar.add(new AppRequest(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5).toString(), rs.getString(6),
+						rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getDouble(11),
+						rs.getDouble(12), rs.getInt(1), rs.getInt(13)));
 			}
 			String table = this.pendingTableToHtmlString(aar);
 			return table;
@@ -205,17 +205,17 @@ public class RequestsDaoImipl implements RequestsDao {
 		sb.append("<!DOCTYPE html><html><head><title></title></head><body><div><table id=\"table\">");
 		for (AppRequest a : aar) {
 			sb.append("<tr><td>" + (a.getRequestid()) + "</td>");
-			sb.append("<tr><td>" + (a.getUserID()) + "</td>");
-			sb.append("<tr><td>" + (a.getName()) + "</td>");
-			sb.append("<tr><td>" + (a.getDate()) + "</td>");
-			sb.append("<tr><td>" + (a.getDescription()) + "</td>");
-			sb.append("<tr><td>" + (a.getType()) + "</td>");
-			sb.append("<tr><td>" + (a.getGradingScale()) + "</td>");
-			sb.append("<tr><td>" + (a.getPassingGrade()) + "</td>");
-			sb.append("<tr><td>" + (a.getJustification()) + "</td>");
-			sb.append("<tr><td>" + (a.getCost()) + "</td>");
-			sb.append("<tr><td>" + (a.getReimbursement()) + "</td>");
-			sb.append("<tr><td>" + (a.getStatus()) + "</td>");
+			sb.append("<td>" + (a.getUserID()) + "</td>");
+			sb.append("<td>" + (a.getName()) + "</td>");
+			sb.append("<td>" + (a.getDate()) + "</td>");
+			sb.append("<td>" + (a.getDescription()) + "</td>");
+			sb.append("<td>" + (a.getType()) + "</td>");
+			sb.append("<td>" + (a.getGradingScale()) + "</td>");
+			sb.append("<td>" + (a.getPassingGrade()) + "</td>");
+			sb.append("<td>" + (a.getJustification()) + "</td>");
+			sb.append("<td>" + (a.getCost()) + "</td>");
+			sb.append("<td>" + (a.getReimbursement()) + "</td>");
+			sb.append("<td>" + (a.getStatus()) + "</td>");
 			sb.append("<td><button class=\"approve\" value=");
 			sb.append("\"" + a.getRequestid()
 					+ " onclick=\"approve(value)\">Approve &#9989;</button><button class=\"deny\" value=\"");
