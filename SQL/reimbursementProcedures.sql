@@ -1,32 +1,17 @@
---select sum(reimbursment) from request where userid=?;
+--select sum(reimbursment) from request where status!=-1 and status!=3 and userid=?;
 --select remainingBal from employee where userid=?;
 
----USEID IS JUST THE PARAMETER VERSION OF USERID 
-/*CREATE OR REPLACE PROCEDURE showMyRequests(useid IN NUMBER)
-AS BEGIN
-select * from request where request.userid=useid order by eventdate;
-COMMIT;
-END;
-/
-CREATE OR REPLACE PROCEDURE showSupRequests(useid IN NUMBER)
-AS BEGIN
-select * from request join employee on request.userid=employee.userid where employee.reportsto=useid order by eventdate;
-COMMIT;
-END;
-/
-CREATE OR REPLACE PROCEDURE showDeptRequests(deptid IN NUMBER)
-AS BEGIN
-select * from request join employee on request.userid=employee.userid where employee.department=deptid order by eventdate;
-COMMIT;
-END;
-/
-CREATE OR REPLACE PROCEDURE showRequests
-AS BEGIN
-select * from request order by eventdate;
-COMMIT;
-END;
-/
-*/
+--show a user all their requests approved or denied
+--select * from request where request.userid=? order by eventdate;
+
+--show requests to direct sup
+--select * from request join employee on request.userid=employee.userid where status=0 and employee.reportsto=? order by eventdate;
+
+--show requests to dept head
+--select * from request join employee on request.userid=employee.userid where status=1 and employee.department=? order by eventdate;
+
+--show requests to benco
+--select * from request where status=2 order by eventdate;
 
 /*authenticates password*/
 --select pass from employee where username=uname;

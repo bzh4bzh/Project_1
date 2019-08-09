@@ -6,10 +6,9 @@ CREATE TABLE employee(
     reportsto NUMBER,
     department NUMBER,
     authority NUMBER, 
-    remainingBal number default 1000,
+    remainingBal number,
     CONSTRAINT authority_check CHECK (authority>=0 AND authority<4)
 );
-
 create table request(
     requestID number primary key,
     userID number,
@@ -23,10 +22,12 @@ create table request(
     justification varchar2(200),
     eventcost number,
     reimbursment number,
-    status number default 0, 
+    status number, 
     foreign key (userid) references employee(userid),
     constraint check_status check (status>=-1 and status<4)
 );
+alter table request modify (status number default 0);
+
 
 create table title(
     titleid number primary key,
@@ -35,24 +36,25 @@ create table title(
 
 create table attachment(
     userid number,
-    doc blob
+    requestid number,
+    doc blob,
+    foreign key (requestid) references request(requestID)
 );
+
+
+
 
 create table department(
     deptid number,
     deptname varchar2(20)
 );
 
-create table eventType(
-    eventid number primary key,
-    eventtype varchar2(20),
-    reimbursePercent number
-);
-
 create table gradingScale(
     gradeid number primary key,
     gradename varchar2(10)
 );
+
+
 
 create sequence recseq;
 
