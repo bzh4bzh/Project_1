@@ -232,17 +232,17 @@ public class RequestsDaoImipl implements RequestsDao {
 			sb.append("<td>" + (a.getCost()) + "</td>");
 			sb.append("<td>" + (a.getReimbursement()) + "</td>");
 			sb.append("<td>" + (a.getStatus()) + "</td>");
-			sb.append("<td><button class=\"approve\" value=");
+			sb.append("<td><button class=\"approve\" name=\"requestId\" value=");
 			sb.append("\"" + a.getRequestid()
-					+ " onclick=\"approve(value)\">Approve &#9989;</button><button class=\"deny\" value=\"");
+					+ "\" onclick= approve(value)>Approve &#9989;</button><button class=\"deny\" value=\"");
 			sb.append(a.getRequestid() + "\" onclick=\"deny(value)\">Deny &#10060;</button></td><td><button value=\"");
 			sb.append(a.getRequestid() + "\" onclick=\"attach(value)\">Files &#128193</button></td></tr>");
 		}
 		sb.append("</tbody></table></div></body>");
-		sb.append("<script>let table = document.getElementById(\"tbody\");for (var i = 0, row; row = table.rows[i]; i++){let tableDate = row.cells[4].innerHTML;tableDate = new Date(tableDate);tableDate.setFullYear(Math.abs(tableDate.getFullYear()));let curDate = new Date();curDate.setHours(0,0,0,0);if (tableDate-curDate <= 86400000*14) {row.style.color=\"red\";}else{break;}");
-		
+		sb.append("<script>window.onload = function() {let table = document.getElementById(\"tbody\");console.log(\"in window onload function\");for (var i = 0, row; row = table.rows[i]; i++){let tableDate = row.cells[4].innerHTML;tableDate = new Date(tableDate);tableDate.setFullYear(Math.abs(tableDate.getFullYear()));let curDate = new Date();curDate.setHours(0,0,0,0);if (tableDate-curDate <= 86400000*14) {row.style.color=\"red\";}else{break;}}};");
+		sb.append("function approve(ReqID){ console.log(\"Approve\", ReqID); let xhr = new XMLHttpRequest(); xhr.onreadystatechange = function() { if(xhr.readyState == 4 && xhr.status == 200) { location.reload(true); } }; xhr.open(\"POST\",\"approve\", true); xhr.send(\"requestId=\"+ReqID); }");
 		sb.append("</script>");
-		sb.append("</script>");
+		sb.append("</html>");
 		
 		return sb.toString();
 	}
