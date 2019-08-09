@@ -29,17 +29,21 @@ public class FormServlet extends HttpServlet {
 		gscale.put("Pass/Fail", 3);
 		gscale.put("Other", 4);
 
-		/*etype.put("University Courses", new EventType("University Courses", 0.8, 1));
+		etype.put("University Courses", new EventType("University Courses", 0.8, 1));
 		etype.put("Certification", new EventType("Certification", 1, 4));
 		etype.put("Technical Training", new EventType("Technical Training", 0.9, 5));
 		etype.put("Seminars", new EventType("Seminars", 0.6, 2));
 		etype.put("Certification Preparation Classes", new EventType("Certification Preparation Classes", 0.75, 3));
 		etype.put("Other", new EventType("Other", 0.3, 6));
-		*/
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("In doPost of FormServlet");
+		if(request.getSession()==null) {
+			RequestDispatcher rd = request.getRequestDispatcher("login.html");
+			rd.forward(request, response);
+		}
 		EmployeeDaoImpl edi=new EmployeeDaoImpl();
 		RequestsDaoImipl rdi=new RequestsDaoImipl();
 		String name=request.getParameter("username");
@@ -50,7 +54,7 @@ public class FormServlet extends HttpServlet {
 		name=request.getParameter("name");
 		String loc= request.getParameter("location") ;
 		String date= request.getParameter("date") ;
-		String desc= request.getParameter("name") ;
+		String desc= request.getParameter("description") ;
 		System.out.println("name is " + desc);
 		String pgrade= request.getParameter("passingGrade") ;
 		
@@ -85,6 +89,10 @@ public class FormServlet extends HttpServlet {
 	//APPROVE REQUEST
 	protected void doPostApprove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("In doPost of ApproveServlet");
+		if(request.getSession()==null) {
+			RequestDispatcher rd = request.getRequestDispatcher("login.html");
+			rd.forward(request, response);
+		}
 		EmployeeDaoImpl edi=new EmployeeDaoImpl();
 		RequestsDaoImipl rdi=new RequestsDaoImipl();
 		int id=edi.getUserID((String)request.getSession().getAttribute("name"));
@@ -97,6 +105,10 @@ public class FormServlet extends HttpServlet {
 	//DENY REQUEST
 	protected void doPostDeny(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("In doPost of DenyServlet");
+		if(request.getSession()==null) {
+			RequestDispatcher rd = request.getRequestDispatcher("login.html");
+			rd.forward(request, response);
+		}
 		RequestsDaoImipl rdi=new RequestsDaoImipl();
 		int recid=Integer.parseInt(request.getParameter("requestId"));
 		rdi.updateStatus(-1,recid);
