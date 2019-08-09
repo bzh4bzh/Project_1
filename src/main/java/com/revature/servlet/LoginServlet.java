@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.daoimpl.EmployeeDaoImpl;
+import com.revature.daoimpl.RequestsDaoImipl;
 
 /**
  * Servlet implementation class LoginServlet
@@ -38,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
+		RequestsDaoImipl rdi = new RequestsDaoImipl();
 		System.out.println("In doPost of LoginServlet");
 		PrintWriter out = response.getWriter();
 		// request.getRequestDispatcher("link.html").include(request, response);
@@ -59,7 +61,14 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("invalidCredentials.html").forward(request, response);
 				out.print("<h1>sorry, username or password error!</h1>"); // its just password error
 			} else if (auth >= 1) {
-				request.getRequestDispatcher("table.html").forward(request, response);
+				//prints out pending request for supervisor 
+				String supName = (String)request.getSession().getAttribute("name");
+				System.out.println("Supervisor name is:" + supName);
+				int supID = edi.getUserID(supName);
+				System.out.println("Supervisor id is " + supID);
+				System.out.println(rdi.getPendingSuper(supID));
+				out.print(rdi.getPendingSuper(edi.getUserID((String)request.getSession().getAttribute("name"))));
+				//request.getRequestDispatcher("table.html").forward(request, response);
 			} else {
 				request.getRequestDispatcher("home.html").forward(request, response);
 			}

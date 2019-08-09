@@ -2,6 +2,7 @@ package com.revature.daoimpl;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,10 +15,51 @@ import com.revature.util.ConnFactory;
 public class RequestsDaoImipl implements RequestsDao {
 	public static ConnFactory cf = ConnFactory.getInstance();
 
+	private String month(String m) {
+		int mx = Integer.parseInt(m);
+		switch (mx) {
+		case 1:
+			return "JAN";
+		case 2:
+			return "FEB";
+		case 3:
+			return "MAR";
+		case 4:
+			return "APR";
+		case 5:
+			return "MAY";
+		case 6:
+			return "JUN";
+		case 7:
+			return "JUL";
+		case 8:
+			return "AUG";
+		case 9:
+			return "SEP";
+		case 10:
+			return "OCT";
+		case 11:
+			return "NOV";
+		case 12:
+			return "DEC";
+		
+		}
+		return null;
+	}
+
 	@Override
-	public void insertRequest(int userID, String name, String location, String date, String description,
-			int type, int gradingScale, String passingGrade, String justification, double cost, double reimbursement) {
+	public void insertRequest(int userID, String name, String location, String date, String description, int type,
+			int gradingScale, String passingGrade, String justification, double cost, double reimbursement) {
 		Connection conn = cf.getConnection();
+
+		// format date
+		String[] split = date.split("-");
+		StringBuffer sb = new StringBuffer();
+		sb.append(split[2] + "-");
+		sb.append(this.month(split[1])+"-");
+		sb.append(split[0]);
+		date = sb.toString();
+		System.out.println("the date is this now " + date);
 		String sql = "{ call insertRec(?,?,?,?,?,?,?,?,?,?,?)";
 		CallableStatement call;
 		try {
@@ -26,6 +68,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			call.setString(2, name);
 			call.setString(3, location);
 			call.setString(4, date);
+			//System.out.println("The date looks like this " + date);
 			call.setString(5, description);
 			call.setInt(6, type);
 			call.setInt(7, gradingScale);
@@ -59,7 +102,7 @@ public class RequestsDaoImipl implements RequestsDao {
 		}
 		return null;
 	}
-	
+
 	public String getMyPending(int userID) {
 		Connection conn = cf.getConnection();
 		ArrayList<AppRequest> aar = new ArrayList<AppRequest>();
@@ -70,9 +113,11 @@ public class RequestsDaoImipl implements RequestsDao {
 			ps.setInt(1, userID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+				Date a = rs.getDate(4);
+				
+				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), a.toString(), rs.getString(5),
 						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
-						rs.getDouble(11),rs.getInt(12)));
+						rs.getDouble(11), rs.getInt(12)));
 			}
 			String table = this.pendingTableToHtmlString(aar);
 			return table;
@@ -81,7 +126,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	@Override
@@ -97,7 +142,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			while (rs.next()) {
 				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
-						rs.getDouble(11),rs.getInt(12)));
+						rs.getDouble(11), rs.getInt(12)));
 			}
 			String table = this.pendingTableToHtmlString(aar);
 			return table;
@@ -121,7 +166,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			while (rs.next()) {
 				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
-						rs.getDouble(11),rs.getInt(12)));
+						rs.getDouble(11), rs.getInt(12)));
 			}
 			String table = this.pendingTableToHtmlString(aar);
 			return table;
@@ -131,7 +176,7 @@ public class RequestsDaoImipl implements RequestsDao {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public String getPendingBenCo(int userID) {
 		Connection conn = cf.getConnection();
@@ -144,7 +189,7 @@ public class RequestsDaoImipl implements RequestsDao {
 			while (rs.next()) {
 				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
-						rs.getDouble(11),rs.getInt(12)));
+						rs.getDouble(11), rs.getInt(12)));
 			}
 			String table = this.pendingTableToHtmlString(aar);
 			return table;
@@ -154,30 +199,30 @@ public class RequestsDaoImipl implements RequestsDao {
 		}
 		return null;
 	}
-	
+
 	private String pendingTableToHtmlString(ArrayList<AppRequest> aar) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<!DOCTYPE html><html><head><title></title></head><body><div><table id=\"table\">");
-		for(AppRequest a: aar) {
-			sb.append("<tr><td>" +(a.getRequestid()) + "</td>");
-			sb.append("<tr><td>" +(a.getUserID()) + "</td>");
-			sb.append("<tr><td>" +(a.getName()) + "</td>");
-			sb.append("<tr><td>" +(a.getDate()) + "</td>");
-			sb.append("<tr><td>" +(a.getDescription()) + "</td>");
-			sb.append("<tr><td>" +(a.getType()) + "</td>");
-			sb.append("<tr><td>" +(a.getGradingScale()) + "</td>");
-			sb.append("<tr><td>" +(a.getPassingGrade()) + "</td>");
-			sb.append("<tr><td>" +(a.getJustification()) + "</td>");
-			sb.append("<tr><td>" +(a.getCost()) + "</td>");
-			sb.append("<tr><td>" +(a.getReimbursement()) + "</td>");
-			sb.append("<tr><td>" +(a.getStatus()) + "</td>");
+		for (AppRequest a : aar) {
+			sb.append("<tr><td>" + (a.getRequestid()) + "</td>");
+			sb.append("<tr><td>" + (a.getUserID()) + "</td>");
+			sb.append("<tr><td>" + (a.getName()) + "</td>");
+			sb.append("<tr><td>" + (a.getDate()) + "</td>");
+			sb.append("<tr><td>" + (a.getDescription()) + "</td>");
+			sb.append("<tr><td>" + (a.getType()) + "</td>");
+			sb.append("<tr><td>" + (a.getGradingScale()) + "</td>");
+			sb.append("<tr><td>" + (a.getPassingGrade()) + "</td>");
+			sb.append("<tr><td>" + (a.getJustification()) + "</td>");
+			sb.append("<tr><td>" + (a.getCost()) + "</td>");
+			sb.append("<tr><td>" + (a.getReimbursement()) + "</td>");
+			sb.append("<tr><td>" + (a.getStatus()) + "</td>");
 			sb.append("<td><button class=\"approve\" value=");
-			sb.append("\""+a.getRequestid()+" onclick=\"approve(value)\">Approve &#9989;</button><button class=\"deny\" value=\"");
-			sb.append(a.getRequestid()+ "\" onclick=\"deny(value)\">Deny &#10060;</button></td></tr>");
+			sb.append("\"" + a.getRequestid()
+					+ " onclick=\"approve(value)\">Approve &#9989;</button><button class=\"deny\" value=\"");
+			sb.append(a.getRequestid() + "\" onclick=\"deny(value)\">Deny &#10060;</button></td></tr>");
 		}
 		return sb.toString();
 	}
-
 
 	@Override
 	public void updateStatus(int authority, int recid) {
@@ -220,7 +265,7 @@ public class RequestsDaoImipl implements RequestsDao {
 	public double getPendingBalance(int userid) {
 		// TODO Auto-generated method stub
 		Connection conn = cf.getConnection();
-		String sql = "select remainingBal from employee where status!= -1 and status!= 3 userid=?";
+		String sql = "select sum(reimbursment) from request where status!= -1 and status!= 3 and request.userid=?";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);

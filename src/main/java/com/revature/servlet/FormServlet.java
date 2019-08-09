@@ -1,6 +1,7 @@
 package com.revature.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.beans.EventType;
 import com.revature.daoimpl.EmployeeDaoImpl;
 import com.revature.daoimpl.RequestsDaoImipl;
+import com.revature.util.ConnFactory;
 
 /**
  * Servlet implementation class FormServlet
@@ -37,34 +39,40 @@ public class FormServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("In doGet of FormServlet");
+		System.out.println("In doPost of FormServlet");
 		EmployeeDaoImpl edi=new EmployeeDaoImpl();
 		RequestsDaoImipl rdi=new RequestsDaoImipl();
 		String name=request.getParameter("username");
-		int id=edi.getUserID(name);
+		System.out.println((String)request.getSession().getAttribute("name") +  " is the session username");
+		int id=edi.getUserID((String)request.getSession().getAttribute("name"));
 		
+		System.out.println("user id is " + id + "for user " + name);
 		name=request.getParameter("name");
 		String loc= request.getParameter("location") ;
 		String date= request.getParameter("date") ;
 		String desc= request.getParameter("name") ;
+		System.out.println("name is " + desc);
 		String pgrade= request.getParameter("passingGrade") ;
-		String just= request.getParameter("justification") ;
-		double cost= Double.parseDouble(request.getParameter("cost"));
 		
+		String just= request.getParameter("justification") ;
+		System.out.println("just is " + just);
+		String cost= request.getParameter("cost");
+		System.out.println("cost is " + cost);
 		
 		EventType et = etype.get(request.getParameter("type"));
+		System.out.println("request param type is " + request.getParameter("type"));
 		int type = et.getId();
 
-		int scale= gscale.get(request.getParameter("gradingScale"));
+		int scale= gscale.get(request.getParameter("gradingFormat"));
 		
-		double reim=cost*et.getPercent();
+		double reim=Double.parseDouble(cost)*et.getPercent();
 		
 		double left=edi.getRemainingBalance(id)-rdi.getPendingBalance(id);
 		
 		if (reim>left){
 			reim=left;
 		}
-		rdi.insertRequest(id, name, loc, date, desc, type, scale, pgrade, just, cost, reim);
+		rdi.insertRequest(id, name, loc, date, desc, type, scale, pgrade, just, Double.parseDouble(cost), reim);
 				
 		RequestDispatcher rd = request.getRequestDispatcher("home.html");
 		rd.forward(request, response);

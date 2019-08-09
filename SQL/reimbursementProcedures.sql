@@ -71,3 +71,5 @@ END;
 /
 
 TRUNCATE TABLE REQUEST;
+
+select sum(reimbursment) from request where status!= -1 and status!= 3 and request.userid=1;
