@@ -12,7 +12,6 @@ import com.revature.util.ConnFactory;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	public static ConnFactory cf = ConnFactory.getInstance();
-
 	@Override
 	public int getUserID(String username) {
 		Connection conn = cf.getConnection();
@@ -34,23 +33,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	// returns the highest authority of a employee id
-	public String checkAthority(int id) {
+	public int checkAthority(int id) {
 		// TODO Auto-generated method stub
 		Connection conn = cf.getConnection();
-		String sql = "Select titlename from title inner join employee on title.titleid=employee.authority where useid=?";
+		String sql = "Select authority from employee where useid=?";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				return rs.getString(1);
+				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return -1;
 	}
 
 

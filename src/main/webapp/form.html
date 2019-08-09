@@ -36,12 +36,12 @@
     <input type="time" id="time" name="time" title="Enter Start Time e.g. 12:00 AM" required/>
     <br>
     <select id="type" name="type" title="What is this reimbursement for?" required>
-      <option value="Certification">Certification</option>
-      <option value = "Technical Training">Technical Training</option>
-      <option value="University Courses">University Courses</option>
-      <option value="Certification Preparation Classes">Certification Preparation Classes</option>
-      <option value="Seminars">Seminars</option>
-      <option value="Other">Other</option>
+      <option>Certification</option>
+      <option>Technical Training</option>
+      <option>University Courses</option>
+      <option>Certification Preparation Classes</option>
+      <option>Seminars</option>
+      <option>Other</option>
     </select>
     <br>
     <!-- Begin Don't touch-->
@@ -50,7 +50,9 @@ City, State, ZIP" title="Address
 City, State, ZIP" required></textarea>
     <!-- End Don't touch-->
     <br>
-    <input type="number" min="0.01" step=".01" id="cost" name="cost" placeholder="$0.00" title="Total Cost" required>
+    <input type="number" pattern="\d*\.\d\d" min="0.01" step=".01" id="cost" name="cost" placeholder="$0.00" title="Total Cost" required>
+    <br>
+    <input type="text" pattern="\d*\.\d\d" id="projected" name="projected" title="Projected Reimbursement" placeholder="Projected Reimbursement" disabled="true"/>
     <br>
     <select id="gradingFormat" name="gradingFormat" title="Grading Format" required>
       <option>Letter</option>
@@ -61,7 +63,9 @@ City, State, ZIP" required></textarea>
     <br>
       <input type="text" id="passingGrade" name="passingGrade" placeholder="Passing grade?" title="What is the passing grade for this course?" required>
     <br>
-    <textarea form="myForm" id="justification" name="justification" placeholder="Work-Related Justification" title="How will this benefit your work?" required></textarea>
+    <input type="text" id="description" name="description" placeholder="Event Description" title= "What is the description for this event?" required>
+    <br>
+    <textarea form="myForm" id="justification" name="justification" placeholder="Work-Related Justification + time missed from work" title="How will this benefit your work and how much time from work have you missed?" required></textarea>
     <br>
     <input type="file" id="fileinput" name="fileinput" title="Optional attachment for any further details">
     <br>
@@ -111,7 +115,37 @@ City, State, ZIP" required></textarea>
       return true;
     }
     }
+    function projectedReimbursement(){
+      /* University Courses 80%, Seminars 60%, Certification Preparation Classes 75%, Certification 100%, Technical Training 90%, Other 30%*/
+      let type = document.getElementById("type").value;
+      let cost = document.getElementById("cost").value;
+      if (type == "University Courses"){
+        let projected = cost * .80;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else if (type == "Seminars"){
+        let projected = cost * .60;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else if (type == "Certification Preparation Classes"){
+        let projected = cost * .75;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else if (type == "Certification"){
+        document.getElementById("projected").value = cost;
+      }
+      else if (type == "Technical Training"){
+        let projected = cost * .90;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else{
+        let projected = cost * .30;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+    }
     document.getElementById("date").addEventListener("change", tooLate, true);
+    document.getElementById("cost").addEventListener("change", projectedReimbursement, true);
+    document.getElementById("type").addEventListener("change", projectedReimbursement, true);
     document.getElementById("submitButton").addEventListener("click", decoy, true);
   </script>
 </body>

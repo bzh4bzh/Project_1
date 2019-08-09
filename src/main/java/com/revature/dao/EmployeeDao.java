@@ -5,7 +5,7 @@ import com.revature.beans.Employee;
 public interface EmployeeDao {
 
 	public abstract int getUserID(String username);
-	public abstract String checkAthority(int id); 
+	public abstract int checkAthority(int id); 
 	public abstract double getRemainingBalance(int id);
 	public abstract String getDepartmentName(int id);
 	public abstract Employee getUser(int id);

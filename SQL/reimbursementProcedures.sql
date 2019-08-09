@@ -51,6 +51,10 @@ insert into request(userID, eventname, eventlocation, eventdate, eventdescriptio
 END;
 /
 
+exec insertRec(2,'event', 'loc', '3-JUN-2018','des',1,1,'C','bc',103,60);
+
+
+
 CREATE OR REPLACE PROCEDURE updateRemains(useid in number, bal in number)
 AS BEGIN
 update employee set remainingBal=bal where userid=useid;
