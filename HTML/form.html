@@ -50,7 +50,9 @@ City, State, ZIP" title="Address
 City, State, ZIP" required></textarea>
     <!-- End Don't touch-->
     <br>
-    <input type="number" min="0.01" step=".01" id="cost" name="cost" placeholder="$0.00" title="Total Cost" required>
+    <input type="number" pattern="\d*\.\d\d" min="0.01" step=".01" id="cost" name="cost" placeholder="$0.00" title="Total Cost" required>
+    <br>
+    <input type="text" pattern="\d*\.\d\d" id="projected" name="projected" title="Projected Reimbursement" placeholder="Projected Reimbursement" disabled="true"/>
     <br>
     <select id="gradingFormat" name="gradingFormat" title="Grading Format" required>
       <option>Letter</option>
@@ -61,7 +63,7 @@ City, State, ZIP" required></textarea>
     <br>
       <input type="text" id="passingGrade" name="passingGrade" placeholder="Passing grade?" title="What is the passing grade for this course?" required>
     <br>
-    <textarea form="myForm" id="justification" name="justification" placeholder="Work-Related Justification" title="How will this benefit your work?" required></textarea>
+    <textarea form="myForm" id="justification" name="justification" placeholder="Work-Related Justification + time missed from work" title="How will this benefit your work?" required></textarea>
     <br>
     <input type="file" id="fileinput" name="fileinput" title="Optional attachment for any further details">
     <br>
@@ -111,7 +113,37 @@ City, State, ZIP" required></textarea>
       return true;
     }
     }
+    function projectedReimbursement(){
+      /* University Courses 80%, Seminars 60%, Certification Preparation Classes 75%, Certification 100%, Technical Training 90%, Other 30%*/
+      let type = document.getElementById("type").value;
+      let cost = document.getElementById("cost").value;
+      if (type == "University Courses"){
+        let projected = cost * .80;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else if (type == "Seminars"){
+        let projected = cost * .60;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else if (type == "Certification Preparation Classes"){
+        let projected = cost * .75;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else if (type == "Certification"){
+        document.getElementById("projected").value = cost;
+      }
+      else if (type == "Technical Training"){
+        let projected = cost * .90;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+      else{
+        let projected = cost * .30;
+        document.getElementById("projected").value = projected.toFixed(2);
+      }
+    }
     document.getElementById("date").addEventListener("change", tooLate, true);
+    document.getElementById("cost").addEventListener("change", projectedReimbursement, true);
+    document.getElementById("type").addEventListener("change", projectedReimbursement, true);
     document.getElementById("submitButton").addEventListener("click", decoy, true);
   </script>
 </body>
