@@ -69,3 +69,5 @@ update request set status=authority where requestid=recid;
 commit;
 END;
 /
+
+TRUNCATE TABLE REQUEST;
