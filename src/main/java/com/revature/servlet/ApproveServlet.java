@@ -26,11 +26,12 @@ public class ApproveServlet extends HttpServlet {
 		EmployeeDaoImpl edi=new EmployeeDaoImpl();
 		RequestsDaoImipl rdi=new RequestsDaoImipl();
 		int id=edi.getUserID((String)request.getSession().getAttribute("name"));
-		System.out.println(request.getParameter("requestId"));
+		
+		System.out.println(request.getParameterMap().size());
 		int recid=Integer.parseInt(request.getParameter("requestId"));
 		System.out.println("requestID is " + recid);
 		rdi.updateStatus(edi.checkAthority(id),recid);
-		
+		response.sendRedirect("supHomeApproved.html");
 		//RequestDispatcher rd = request.getRequestDispatcher("home.html");
 		//rd.forward(request, response);
 	}

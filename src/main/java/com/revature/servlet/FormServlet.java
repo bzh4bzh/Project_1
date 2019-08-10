@@ -39,6 +39,10 @@ public class FormServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession(false) == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("login.html");
+			rd.forward(request, response);
+		}
 		System.out.println("In doPost of FormServlet");
 		EmployeeDaoImpl edi=new EmployeeDaoImpl();
 		RequestsDaoImipl rdi=new RequestsDaoImipl();

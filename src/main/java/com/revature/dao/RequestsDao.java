@@ -6,7 +6,7 @@ public interface RequestsDao {
 	public abstract String getApplicationStatus(int id);
 	public abstract String getPendingSuper(int userid);
 	public abstract String getPendingDeptHead(int userid);
-	public abstract String getPendingBenCo(int userid);
+	public abstract String getPendingBenCo();
 	public abstract void updateStatus(int authority, int recid);
 	public abstract void updateReimbursement(int id, double bal);
 	public abstract double getPendingBalance(int userId);

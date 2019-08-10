@@ -30,13 +30,31 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return -1;
 	}
+	
+	public int getDeptID(String username) {
+		Connection conn = cf.getConnection();
+		String sql = "Select department from employee where username=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
 
 	@Override
 	// returns the highest authority of a employee id
 	public int checkAthority(int id) {
 		// TODO Auto-generated method stub
 		Connection conn = cf.getConnection();
-		String sql = "Select authority from employee where useid=?";
+		String sql = "Select authority from employee where userid=?";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);

@@ -61,14 +61,17 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("invalidCredentials.html").forward(request, response);
 				out.print("<h1>sorry, username or password error!</h1>"); // its just password error
 			} else if (auth >= 1) {
-				//prints out pending request for supervisor 
-				String supName = (String)request.getSession().getAttribute("name");
-				System.out.println("Supervisor name is:" + supName);
-				int supID = edi.getUserID(supName);
-				System.out.println("Supervisor id is " + supID);
-				System.out.println(rdi.getPendingSuper(supID));
-				out.print(rdi.getPendingSuper(edi.getUserID((String)request.getSession().getAttribute("name"))));
-				//request.getRequestDispatcher("table.html").forward(request, response);
+//				//prints out pending request for supervisor 
+//				String supName = (String)request.getSession().getAttribute("name");
+//				System.out.println("Supervisor name is:" + supName);
+//				int supID = edi.getUserID(supName);
+//				//System.out.println("Supervisor id is " + supID);
+//				//System.out.println(rdi.getPendingSuper(supID));
+//				
+//				
+//				//out.print(rdi.getPendingSuper(edi.getUserID((String)request.getSession().getAttribute("name"))));
+//				request.getRequestDispatcher("supHome.html").forward(request, response);
+				request.getRequestDispatcher("supHome.html").forward(request, response);
 			} else {
 				request.getRequestDispatcher("home.html").forward(request, response);
 			}

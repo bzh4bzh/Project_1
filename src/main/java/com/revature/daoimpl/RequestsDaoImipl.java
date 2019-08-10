@@ -142,7 +142,7 @@ public class RequestsDaoImipl implements RequestsDao {
 	public String getPendingSuper(int userID) {
 		Connection conn = cf.getConnection();
 		ArrayList<AppRequest> aar = new ArrayList<AppRequest>();
-		String sql = "select * from request join employee on request.userid=employee.userid where employee.reportsto=? order by eventdate";
+		String sql = "select * from request join employee on request.userid=employee.userid where status = 0 and employee.reportsto=? order by eventdate";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -167,16 +167,17 @@ public class RequestsDaoImipl implements RequestsDao {
 	public String getPendingDeptHead(int deptID) {
 		Connection conn = cf.getConnection();
 		ArrayList<AppRequest> aar = new ArrayList<AppRequest>();
-		String sql = "select * from request join employee on request.userid=employee.userid where employee.department=? order by eventdate;";
+		String sql = "select * from request join employee on request.userid=employee.userid where status = 1 and employee.department=? order by eventdate";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, deptID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
-						rs.getDouble(11), rs.getInt(12)));
+				aar.add(new AppRequest(rs.getInt(2), rs.getString(3), rs.getString(4),
+						this.formatDate(rs.getDate(5).toString()), rs.getString(6), rs.getInt(7), rs.getInt(8),
+						rs.getString(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12), rs.getInt(1),
+						rs.getInt(13)));
 			}
 			String table = this.pendingTableToHtmlString(aar);
 			return table;
@@ -188,7 +189,7 @@ public class RequestsDaoImipl implements RequestsDao {
 	}
 
 	@Override
-	public String getPendingBenCo(int userID) {
+	public String getPendingBenCo() {
 		Connection conn = cf.getConnection();
 		ArrayList<AppRequest> aar = new ArrayList<AppRequest>();
 		String sql = "select * from request order by eventdate";
@@ -232,15 +233,15 @@ public class RequestsDaoImipl implements RequestsDao {
 			sb.append("<td>" + (a.getCost()) + "</td>");
 			sb.append("<td>" + (a.getReimbursement()) + "</td>");
 			sb.append("<td>" + (a.getStatus()) + "</td>");
-			sb.append("<td><button class=\"approve\" name=\"requestId\" value=");
+			sb.append("<td><form method=\"post\" action=\"approve\"><button class=\"approve\" name=\"requestId\" value=");
 			sb.append("\"" + a.getRequestid()
-					+ "\" onclick= approve(value)>Approve &#9989;</button><button class=\"deny\" value=\"");
+					+ "\" onclick= approve(value)>Approve &#9989;</button></form><button class=\"deny\" value=\"");
 			sb.append(a.getRequestid() + "\" onclick=\"deny(value)\">Deny &#10060;</button></td><td><button value=\"");
 			sb.append(a.getRequestid() + "\" onclick=\"attach(value)\">Files &#128193</button></td></tr>");
 		}
 		sb.append("</tbody></table></div></body>");
 		sb.append("<script>window.onload = function() {let table = document.getElementById(\"tbody\");console.log(\"in window onload function\");for (var i = 0, row; row = table.rows[i]; i++){let tableDate = row.cells[4].innerHTML;tableDate = new Date(tableDate);tableDate.setFullYear(Math.abs(tableDate.getFullYear()));let curDate = new Date();curDate.setHours(0,0,0,0);if (tableDate-curDate <= 86400000*14) {row.style.color=\"red\";}else{break;}}};");
-		sb.append("function approve(ReqID){ console.log(\"Approve\", ReqID); let xhr = new XMLHttpRequest(); xhr.onreadystatechange = function() { if(xhr.readyState == 4 && xhr.status == 200) { location.reload(true); } }; xhr.open(\"POST\",\"approve\", true); xhr.send(\"requestId=\"+ReqID); }");
+		sb.append("function approve(ReqID){ console.log(\"Approve\", ReqID); let xhr = new XMLHttpRequest(); xhr.onreadystatechange = function() { if(xhr.readyState == 4 && xhr.status == 200) { location.reload(true); } };console.log(\"requestId=\"+ReqID); xhr.open(\"POST\",\"approve\", true); xhr.send(\"requestId=\" + ReqID); }");
 		sb.append("</script>");
 		sb.append("</html>");
 		
