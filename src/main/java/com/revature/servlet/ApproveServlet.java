@@ -30,7 +30,11 @@ public class ApproveServlet extends HttpServlet {
 		System.out.println(request.getParameterMap().size());
 		int recid=Integer.parseInt(request.getParameter("requestId"));
 		System.out.println("requestID is " + recid);
-		rdi.updateStatus(edi.checkAthority(id),recid);
+		rdi.updateStatus( edi.checkAthority(id),recid);
+		if(rdi.getApplicationStatus(recid)==3) {
+			int userid = rdi.getUserId(recid);
+			edi.updateRemainingBalance(userid, edi.getRemainingBalance(userid)-rdi.getRem(recid));
+		}
 		response.sendRedirect("supHomeApproved.html");
 		//RequestDispatcher rd = request.getRequestDispatcher("home.html");
 		//rd.forward(request, response);

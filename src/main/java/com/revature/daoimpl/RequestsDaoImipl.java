@@ -94,22 +94,58 @@ public class RequestsDaoImipl implements RequestsDao {
 
 	}
 
-	@Override
-	public String getApplicationStatus(int id) {
+	public int getUserId(int recid) {
 		Connection conn = cf.getConnection();
-		String sql = "select status from request inner join employee on request.userid=employee.userid where employee.userid=?";
+		String sql = "select userid from request where requestid=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, recid);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int getRem(int recid) {
+		Connection conn = cf.getConnection();
+		String sql = "select reimbursment from request where requestid=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, recid);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	
+	
+	@Override
+	public int getApplicationStatus(int id) {
+		Connection conn = cf.getConnection();
+		String sql = "select status from request where requestid=?";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
-			return rs.getString(1);
+			return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return -1;
 	}
 
 	public String getMyPending(int userID) {
@@ -192,15 +228,16 @@ public class RequestsDaoImipl implements RequestsDao {
 	public String getPendingBenCo() {
 		Connection conn = cf.getConnection();
 		ArrayList<AppRequest> aar = new ArrayList<AppRequest>();
-		String sql = "select * from request order by eventdate";
+		String sql = "select * from request where status = 2 order by eventdate";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				aar.add(new AppRequest(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getDouble(10),
-						rs.getDouble(11), rs.getInt(12)));
+				aar.add(new AppRequest(rs.getInt(2), rs.getString(3), rs.getString(4),
+						this.formatDate(rs.getDate(5).toString()), rs.getString(6), rs.getInt(7), rs.getInt(8),
+						rs.getString(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12), rs.getInt(1),
+						rs.getInt(13)));
 			}
 			String table = this.pendingTableToHtmlString(aar);
 			return table;
@@ -263,7 +300,6 @@ public class RequestsDaoImipl implements RequestsDao {
 			//
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
