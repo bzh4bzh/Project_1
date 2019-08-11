@@ -7,36 +7,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.revature.daoimpl.EmployeeDaoImpl;
 import com.revature.daoimpl.RequestsDaoImipl;
 
 /**
  * Servlet implementation class ApproveServlet
  */
-public class ApproveServlet extends HttpServlet {
+public class DenyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("In doPost of ApproveServlet");
+		System.out.println("In doPost of DenyServlet");
 		if(request.getSession(false)==null) {
 			response.sendRedirect("login.html");
 		}
-		EmployeeDaoImpl edi=new EmployeeDaoImpl();
 		RequestsDaoImipl rdi=new RequestsDaoImipl();
-		int id=edi.getUserID((String)request.getSession().getAttribute("name"));
-		
-		System.out.println(request.getParameterMap().size());
+		System.out.println(request.getParameter("requestId"));
 		int recid=Integer.parseInt(request.getParameter("requestId"));
-		System.out.println("requestID is " + recid);
-		rdi.updateStatus( edi.checkAthority(id),recid);
-		if(rdi.getApplicationStatus(recid)==3) {
-			int userid = rdi.getUserId(recid);
-			edi.updateRemainingBalance(userid, edi.getRemainingBalance(userid)-rdi.getRem(recid));
-		}
-		response.sendRedirect("supHomeApproved.html");
+		rdi.updateStatus( -1,recid);
+		
+		response.sendRedirect("supHomeDenied.html");
 		//RequestDispatcher rd = request.getRequestDispatcher("home.html");
 		//rd.forward(request, response);
 	}
 
 }
+

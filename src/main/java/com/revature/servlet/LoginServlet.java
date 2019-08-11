@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.daoimpl.EmployeeDaoImpl;
-import com.revature.daoimpl.RequestsDaoImipl;
 
 /**
  * Servlet implementation class LoginServlet
@@ -39,7 +38,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
-		RequestsDaoImipl rdi = new RequestsDaoImipl();
 		System.out.println("In doPost of LoginServlet");
 		PrintWriter out = response.getWriter();
 		// request.getRequestDispatcher("link.html").include(request, response);

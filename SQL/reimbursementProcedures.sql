@@ -24,7 +24,8 @@ COMMIT;
 END;
 /
 */
-
+select docs from attachment where requestid = 23 and userid = 1;
+insert into attachment values(1,44,'some.other.links');
 /*authenticates password*/
 --select pass from employee where username=uname;
 
@@ -43,16 +44,17 @@ END;
 
 CREATE OR REPLACE PROCEDURE insertRec(useId number, ename varchar2, eloc varchar2,
     edate date, edesc varchar2, etype number, gscale number, pgrade varchar2, justifi varchar2,
-    ecost number, reimburs number)
+    ecost number, reimburs number, links varchar2)
 AS BEGIN
 insert into request(userID, eventname, eventlocation, eventdate, eventdescription, eventtype, gradingScale,
-            passingGrade, justification, eventcost, reimbursment) values (useId, ename, eloc, edate, edesc, etype, gscale, pgrade, 
-            justifi, ecost, reimburs);
+            passingGrade, justification, eventcost, reimbursment,docs ) values (useId, ename, eloc, edate, edesc, etype, gscale, pgrade, 
+            justifi, ecost, reimburs,links);
 END;
 /
 
-exec insertRec(2,'event', 'loc', '3-JUN-2018','des',1,1,'C','bc',103,60);
-
+insert into request(userID, eventname, eventlocation, eventdate, eventdescription, eventtype, gradingScale,
+            passingGrade, justification, eventcost, reimbursment,docs ) values (1, 'test', 'test', '20-JAN-20', 'test', 1, 1, 'test', 
+            'test', 100, 50,'test.link');
 
 
 CREATE OR REPLACE PROCEDURE updateRemains(useid in number, bal in number)
@@ -74,6 +76,4 @@ commit;
 END;
 /
 
-TRUNCATE TABLE REQUEST;
-
-select sum(reimbursment) from request where status!= -1 and status!= 3 and request.userid=1;
+select recseq.currval from dual;

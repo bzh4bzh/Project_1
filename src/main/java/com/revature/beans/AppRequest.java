@@ -22,22 +22,31 @@ public class AppRequest {
 	 * pending @ Dept Head 2: pending @ Ben Co 3:approved
 	 */
 	private int status;
+	private String links;
 
 	public AppRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AppRequest(int userID, String name, String location, String date, String description, int type,
-			int gradingScale, String passingGrade, String justification, double cost, double reimbursement,
-			int requestId) {
-		this(userID, name, location, date, description, type, gradingScale, passingGrade, justification, cost,
-				reimbursement, requestId, 0);
+	public String getLinks() {
+		return links;
+	}
+
+	public void setLinks(String links) {
+		this.links = links;
 	}
 
 	public AppRequest(int userID, String name, String location, String date, String description, int type,
 			int gradingScale, String passingGrade, String justification, double cost, double reimbursement,
-			int requestId, int status) {
+			int requestId, String links) {
+		this(userID, name, location, date, description, type, gradingScale, passingGrade, justification, cost,
+				reimbursement, requestId, links, 0);
+	}
+
+	public AppRequest(int userID, String name, String location, String date, String description, int type,
+			int gradingScale, String passingGrade, String justification, double cost, double reimbursement,
+			int requestId, String links, int status) {
 		super();
 		this.userID = userID;
 		this.name = name;
@@ -52,6 +61,7 @@ public class AppRequest {
 		this.reimbursement = reimbursement;
 		this.status = status;
 		this.Requestid = requestId;
+		this.links = links;
 	}
 
 	public double getReimbursement() {
