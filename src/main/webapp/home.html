@@ -59,6 +59,12 @@ li a:hover {
 					</button>
 			</form>
 		</li>
+		<li>
+		<form method="post" action="notification">
+				<button class="supHome" type="submit" onclick=getNotifTables()>View Notifications
+					</button>
+			</form>
+		</li>
 		<li><a class = "supHome" href="form.html">Form</a></li>
 		<li>
 			<form method="get" action="logout">
@@ -78,6 +84,17 @@ li a:hover {
             }
         };
         xhr.open("POST", "supHome", true);
+        xhr.send();
+    }
+    function getNotifTables() {
+        console.log("gettingNotifications");
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                location.reload(true);
+            }
+        };
+        xhr.open("POST", "notification", true);
         xhr.send();
     }
     function logout() {

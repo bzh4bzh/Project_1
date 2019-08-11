@@ -94,4 +94,24 @@
     <servlet-name>AskMoreInfoServlet2</servlet-name>
     <url-pattern>/askmoreinfo2</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitMoreInfo</display-name>
+    <servlet-name>SubmitMoreInfo</servlet-name>
+    <servlet-class>com.revature.servlet.SubmitMoreInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitMoreInfo</servlet-name>
+    <url-pattern>/submitmoreinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NotificationServlet</display-name>
+    <servlet-name>NotificationServlet</servlet-name>
+    <servlet-class>com.revature.servlet.NotificationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotificationServlet</servlet-name>
+    <url-pattern>/notification</url-pattern>
+  </servlet-mapping>
 </web-app>

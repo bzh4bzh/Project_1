@@ -55,14 +55,8 @@ li a:hover {
 		<li><a class="supHome" href="home.html">Home</a></li>
 		<li>
 			<form method="post" action="supHome">
-				<button class="supHome" type="submit" onclick=getTables()>Approve/Deny
+				<button class="supHome" onclick=getTables()>Approve/Deny
 					Requests</button>
-			</form>
-		</li>
-		<li>
-		<form method="post" action="notification">
-				<button class="supHome" type="submit" onclick=getNotifTables()>View Notifications
-					</button>
 			</form>
 		</li>
 		<li>
@@ -74,6 +68,7 @@ li a:hover {
 
 </body>
 <script>
+	alert("Information Submitted");
     function getTables() {
         console.log("gettingTables");
         let xhr = new XMLHttpRequest();
@@ -83,17 +78,6 @@ li a:hover {
             }
         };
         xhr.open("POST", "supHome", true);
-        xhr.send();
-    }
-    function getNotifTables() {
-        console.log("gettingNotifications");
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                location.reload(true);
-            }
-        };
-        xhr.open("POST", "notification", true);
         xhr.send();
     }
     function logout() {

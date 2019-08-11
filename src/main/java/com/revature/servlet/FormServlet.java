@@ -44,11 +44,11 @@ public class FormServlet extends HttpServlet {
 		String cost = request.getParameter("cost");
 		System.out.println("cost is " + cost);
 
-		EventType et = Holding.getEtype().get(request.getParameter("type"));
+		EventType et = h.getEtype().get(request.getParameter("type"));
 		System.out.println("request param type is " + request.getParameter("type"));
 		int type = et.getId();
 
-		int scale = Holding.getGscale().get(request.getParameter("gradingFormat"));
+		int scale = h.getGscale().get(request.getParameter("gradingFormat"));
 		String attachments = request.getParameter("fileinput");
 		
 		double reim = Double.parseDouble(cost) * et.getPercent();

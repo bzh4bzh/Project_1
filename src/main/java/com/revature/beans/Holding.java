@@ -30,13 +30,13 @@ public class Holding {
 	public Holding() {
 		// TODO Auto-generated constructor stub
 	}
-	public static HashMap<String, Integer> getGscale() {
+	public HashMap<String, Integer> getGscale() {
 		return gscale;
 	}
-	public static HashMap<String, EventType> getEtype() {
+	public HashMap<String, EventType> getEtype() {
 		return etype;
 	}
-	public static HashMap<Integer, String> getDtype() {
+	public HashMap<Integer, String> getDtype() {
 		return dtype;
 	}
 	

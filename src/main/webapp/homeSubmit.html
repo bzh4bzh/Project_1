@@ -55,8 +55,8 @@ li a:hover {
 		<li><a class="supHome" href="home.html">Home</a></li>
 		<li>
 			<form method="post" action="supHome">
-				<button class="supHome" type="submit" onclick=getTables()>Approve/Deny
-					Requests</button>
+				<button class="supHome" type="submit" onclick=getTables()>View Pending Requests
+					</button>
 			</form>
 		</li>
 		<li>
@@ -65,6 +65,7 @@ li a:hover {
 					</button>
 			</form>
 		</li>
+		<li><a class = "supHome" href="form.html">Form</a></li>
 		<li>
 			<form method="get" action="logout">
 				<button class="supHome" onclick=logout()>Logout</button>
@@ -74,6 +75,7 @@ li a:hover {
 
 </body>
 <script>
+	alert("Submitted More Info")
     function getTables() {
         console.log("gettingTables");
         let xhr = new XMLHttpRequest();

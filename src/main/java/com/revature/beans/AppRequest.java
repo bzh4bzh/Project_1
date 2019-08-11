@@ -9,7 +9,7 @@ public class AppRequest {
 	private String date;
 	private int type;
 	private String justification;
-	private int flagged; // if 0 not flagged. else = id of person who needs to give more info
+	private int flagged; // if -1 not flagged. else = id of person who needs to give more info
 	/*
 	 * 0: letter 1: out of 100 2: pass fail 3: other
 	 */
@@ -18,6 +18,7 @@ public class AppRequest {
 	private String passingGrade;
 	private double cost;
 	private double reimbursement;
+	private String moreInfo;
 	/*
 	 * -1 to 4 for pending status -1: denied 0: pending @ Direct Supervisro 1:
 	 * pending @ Dept Head 2: pending @ Ben Co 3:approved
@@ -30,6 +31,14 @@ public class AppRequest {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getMoreInfo() {
+		return moreInfo;
+	}
+
+	public void setMoreInfo(String moreInfo) {
+		this.moreInfo = moreInfo;
+	}
+
 	public int getFlagged() {
 		return flagged;
 	}
@@ -48,14 +57,14 @@ public class AppRequest {
 
 	public AppRequest(int userID, String name, String location, String date, String description, int type,
 			int gradingScale, String passingGrade, String justification, double cost, double reimbursement,
-			int requestId, String links) {
+			int requestId, String links, String moreInfo, int flagged) {
 		this(userID, name, location, date, description, type, gradingScale, passingGrade, justification, cost,
-				reimbursement, requestId, links, 0);
+				reimbursement, requestId, links, null,-1,0);
 	}
 
 	public AppRequest(int userID, String name, String location, String date, String description, int type,
 			int gradingScale, String passingGrade, String justification, double cost, double reimbursement,
-			int requestId, String links, int status) {
+			int requestId, String links,String moreInfo, int flagged, int status) {
 		super();
 		this.userID = userID;
 		this.name = name;
@@ -71,7 +80,8 @@ public class AppRequest {
 		this.status = status;
 		this.Requestid = requestId;
 		this.links = links;
-		this.flagged = 0;
+		this.flagged = flagged;
+		this.moreInfo = moreInfo;
 	}
 
 	public double getReimbursement() {
