@@ -28,6 +28,11 @@ create table request(
     constraint check_status check (status>=-1 and status<4)
 );
 
+ALTER TABLE request
+ADD (
+  docs VARCHAR2(500)
+);
+
 create table title(
     titleid number primary key,
     titlename varchar2(20)
@@ -35,8 +40,11 @@ create table title(
 
 create table attachment(
     userid number,
-    doc blob
+    requestid number,
+    docs varchar2(500)
 );
+
+drop table attachment;
 
 create table department(
     deptid number,
@@ -55,6 +63,8 @@ create table gradingScale(
 );
 
 create sequence recseq;
+
+select recseq.currval from dual;
 
 CREATE OR REPLACE TRIGGER recidmaker
 BEFORE INSERT ON request
