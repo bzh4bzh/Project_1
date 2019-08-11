@@ -1,7 +1,6 @@
 package com.revature.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.beans.EventType;
 import com.revature.daoimpl.EmployeeDaoImpl;
 import com.revature.daoimpl.RequestsDaoImipl;
-import com.revature.util.ConnFactory;
 
 /**
  * Servlet implementation class FormServlet

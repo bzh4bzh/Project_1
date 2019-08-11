@@ -54,4 +54,24 @@
     <servlet-name>supHome</servlet-name>
     <url-pattern>/supHome</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DenyServlet</display-name>
+    <servlet-name>DenyServlet</servlet-name>
+    <servlet-class>com.revature.servlet.DenyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DenyServlet</servlet-name>
+    <url-pattern>/deny</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Attachment</display-name>
+    <servlet-name>Attachment</servlet-name>
+    <servlet-class>com.revature.servlet.Attachment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Attachment</servlet-name>
+    <url-pattern>/attachment</url-pattern>
+  </servlet-mapping>
 </web-app>

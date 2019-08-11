@@ -272,13 +272,14 @@ public class RequestsDaoImipl implements RequestsDao {
 			sb.append("<td>" + (a.getStatus()) + "</td>");
 			sb.append("<td><form method=\"post\" action=\"approve\"><button class=\"approve\" name=\"requestId\" value=");
 			sb.append("\"" + a.getRequestid()
-					+ "\" onclick= approve(value)>Approve &#9989;</button></form><button class=\"deny\" value=\"");
-			sb.append(a.getRequestid() + "\" onclick=\"deny(value)\">Deny &#10060;</button></td><td><button value=\"");
+					+ "\" onclick= approve(value)>Approve &#9989;</button></form><form method=\"post\" action=\"deny\"><button class=\"deny\" name=\"requestId\" value=\"");
+			sb.append(a.getRequestid() + "\" onclick=\"deny(value)\">Deny &#10060;</button></form></td><td><button value=\"");
 			sb.append(a.getRequestid() + "\" onclick=\"attach(value)\">Files &#128193</button></td></tr>");
 		}
 		sb.append("</tbody></table></div></body>");
 		sb.append("<script>window.onload = function() {let table = document.getElementById(\"tbody\");console.log(\"in window onload function\");for (var i = 0, row; row = table.rows[i]; i++){let tableDate = row.cells[4].innerHTML;tableDate = new Date(tableDate);tableDate.setFullYear(Math.abs(tableDate.getFullYear()));let curDate = new Date();curDate.setHours(0,0,0,0);if (tableDate-curDate <= 86400000*14) {row.style.color=\"red\";}else{break;}}};");
 		sb.append("function approve(ReqID){ console.log(\"Approve\", ReqID); let xhr = new XMLHttpRequest(); xhr.onreadystatechange = function() { if(xhr.readyState == 4 && xhr.status == 200) { location.reload(true); } };console.log(\"requestId=\"+ReqID); xhr.open(\"POST\",\"approve\", true); xhr.send(\"requestId=\" + ReqID); }");
+		sb.append("function deny(ReqID){ console.log(\"Deny\", ReqID); let xhr = new XMLHttpRequest(); xhr.onreadystatechange = function() { if(xhr.readyState == 4 && xhr.status == 200) { location.reload(true); } };console.log(\"requestId=\"+ReqID); xhr.open(\"POST\",\"deny\", true); xhr.send(\"requestId=\" + ReqID); }");
 		sb.append("</script>");
 		sb.append("</html>");
 		
