@@ -76,4 +76,15 @@ commit;
 END;
 /
 
+CREATE OR REPLACE PROCEDURE updateFlagged(recid in number, authority in number)
+AS BEGIN
+update request set flagged=authority where requestid=recid;
+commit;
+END;
+/
+
+exec updateFlagged(42,0);
+
 select recseq.currval from dual;
+
+select * from request join employee on request.userid=employee.userid where status = 0 and employee.reportsto=3 and flagged = -1 order by eventdate

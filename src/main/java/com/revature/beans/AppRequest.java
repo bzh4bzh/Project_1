@@ -9,6 +9,7 @@ public class AppRequest {
 	private String date;
 	private int type;
 	private String justification;
+	private int flagged; // if 0 not flagged. else = id of person who needs to give more info
 	/*
 	 * 0: letter 1: out of 100 2: pass fail 3: other
 	 */
@@ -29,6 +30,14 @@ public class AppRequest {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public int getFlagged() {
+		return flagged;
+	}
+
+	public void setFlagged(int flagged) {
+		this.flagged = flagged;
+	}
+
 	public String getLinks() {
 		return links;
 	}
@@ -62,6 +71,7 @@ public class AppRequest {
 		this.status = status;
 		this.Requestid = requestId;
 		this.links = links;
+		this.flagged = 0;
 	}
 
 	public double getReimbursement() {

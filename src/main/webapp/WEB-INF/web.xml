@@ -74,4 +74,24 @@
     <servlet-name>Attachment</servlet-name>
     <url-pattern>/attachment</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AskMoreInfoServelt</display-name>
+    <servlet-name>AskMoreInfoServelt</servlet-name>
+    <servlet-class>com.revature.servlet.AskMoreInfoServelt</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AskMoreInfoServelt</servlet-name>
+    <url-pattern>/askmoreinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AskMoreInfoServlet2</display-name>
+    <servlet-name>AskMoreInfoServlet2</servlet-name>
+    <servlet-class>com.revature.servlet.AskMoreInfoServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AskMoreInfoServlet2</servlet-name>
+    <url-pattern>/askmoreinfo2</url-pattern>
+  </servlet-mapping>
 </web-app>

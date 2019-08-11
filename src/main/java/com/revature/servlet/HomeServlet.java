@@ -46,20 +46,14 @@ public class HomeServlet extends HttpServlet {
 		int auth = edi.getUser(edi.getUserID(name)).getAuthority();
 		
 		if (auth == 1) {
-			//prints out pending request for supervisor 
-			String supName = (String)request.getSession().getAttribute("name");
-			System.out.println("Supervisor name is:" + supName);
-			//int supID = edi.getUserID(supName);
-			//System.out.println("Supervisor id is " + supID);
-			//System.out.println(rdi.getPendingSuper(supID));
 			out.print(rdi.getPendingSuper(edi.getUserID((String)request.getSession().getAttribute("name"))));
-			//request.getRequestDispatcher("supHome.html").forward(request, response);
 		} else if(auth == 2) {
 			out.print(rdi.getPendingDeptHead(edi.getDeptID((String)request.getSession().getAttribute("name"))));
 		} else if(auth == 3) {
 			out.print(rdi.getPendingBenCo());
 		}else {
-			request.getRequestDispatcher("login.html").forward(request, response);
+			out.print(rdi.getMyPending(edi.getUserID((String)request.getSession().getAttribute("name"))));
+			//request.getRequestDispatcher("login.html").forward(request, response);
 		}
 	}
 

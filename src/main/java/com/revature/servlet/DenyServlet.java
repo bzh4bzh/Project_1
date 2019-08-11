@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.daoimpl.EmployeeDaoImpl;
 import com.revature.daoimpl.RequestsDaoImipl;
 
 /**
@@ -22,11 +23,15 @@ public class DenyServlet extends HttpServlet {
 			response.sendRedirect("login.html");
 		}
 		RequestsDaoImipl rdi=new RequestsDaoImipl();
+		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		System.out.println(request.getParameter("requestId"));
 		int recid=Integer.parseInt(request.getParameter("requestId"));
 		rdi.updateStatus( -1,recid);
-		
+		if(edi.checkAthority(rdi.getUserId(recid)) == 0) {
+			response.sendRedirect("homeRejected.html");
+		}else {
 		response.sendRedirect("supHomeDenied.html");
+		}
 		//RequestDispatcher rd = request.getRequestDispatcher("home.html");
 		//rd.forward(request, response);
 	}

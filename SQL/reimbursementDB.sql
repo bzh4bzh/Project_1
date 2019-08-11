@@ -33,6 +33,12 @@ ADD (
   docs VARCHAR2(500)
 );
 
+ALTER TABLE request
+MODIFY (
+  flagged number default -1
+);
+
+
 create table title(
     titleid number primary key,
     titlename varchar2(20)
