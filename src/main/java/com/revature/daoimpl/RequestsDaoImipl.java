@@ -251,7 +251,7 @@ public class RequestsDaoImipl implements RequestsDao {
 	public String getFlaggedSuper(int userID) {
 		Connection conn = cf.getConnection();
 		ArrayList<AppRequest> aar = new ArrayList<AppRequest>();
-		String sql = "select * from request join employee on request.userid=employee.userid where status = 0 and employee.reportsto=? and flagged = 1 order by eventdate";
+		String sql = "select * from request join employee on request.userid=employee.userid where status != -1 and employee.reportsto=? and flagged = 1 order by eventdate";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -301,7 +301,7 @@ public class RequestsDaoImipl implements RequestsDao {
 	public String getFlaggedDeptHead(int deptID) {
 		Connection conn = cf.getConnection();
 		ArrayList<AppRequest> aar = new ArrayList<AppRequest>();
-		String sql = "select * from request join employee on request.userid=employee.userid where status = 1 and employee.department=? and flagged = 2 order by eventdate";
+		String sql = "select * from request join employee on request.userid=employee.userid where status != -1 and employee.department=? and flagged = 2 order by eventdate";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -313,7 +313,8 @@ public class RequestsDaoImipl implements RequestsDao {
 						rs.getString(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12), rs.getInt(1),
 						rs.getString(14),rs.getString(17),rs.getInt(15), rs.getInt(13)));
 			}
-			String table = this.pendingTableToHtmlString(aar);
+			String table = this.pendingNotifToHtmlString(aar);
+			
 			return table;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
