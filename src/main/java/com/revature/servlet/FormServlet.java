@@ -51,7 +51,7 @@ public class FormServlet extends HttpServlet {
 		int scale = h.getGscale().get(request.getParameter("gradingFormat"));
 		String attachments = request.getParameter("fileinput");
 		
-		double reim = Double.parseDouble(cost) * et.getPercent();
+		double reim = Math.round(Double.parseDouble(cost) * et.getPercent()*100)/100;
 
 		double left = edi.getRemainingBalance(id) - rdi.getPendingBalance(id);
 
@@ -62,7 +62,7 @@ public class FormServlet extends HttpServlet {
 		rdi.insertRequest(id, name, loc, date, desc, type, scale, pgrade, just, Double.parseDouble(cost), reim, attachments);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("home.html");
+		RequestDispatcher rd = request.getRequestDispatcher("homeSubmit.html");
 		rd.forward(request, response);
 	}
 

@@ -114,4 +114,34 @@
     <servlet-name>NotificationServlet</servlet-name>
     <url-pattern>/notification</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitGradeServlet</display-name>
+    <servlet-name>SubmitGradeServlet</servlet-name>
+    <servlet-class>com.revature.servlet.SubmitGradeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitGradeServlet</servlet-name>
+    <url-pattern>/submitgrade</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GradesServlet</display-name>
+    <servlet-name>GradesServlet</servlet-name>
+    <servlet-class>com.revature.servlet.GradeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GradesServlet</servlet-name>
+    <url-pattern>/grades</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PayOutServlet</display-name>
+    <servlet-name>PayOutServlet</servlet-name>
+    <servlet-class>com.revature.servlet.PayOutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PayOutServlet</servlet-name>
+    <url-pattern>/payout</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -38,8 +38,11 @@ public class SubmitMoreInfo extends HttpServlet {
 		info.append(oldinfo + newinfo + "<br>");
 		rdi.updateInfo(info.toString(), recid);
 		rdi.updateFlagged(recid, -1);
-		if (edi.checkAthority(edi.getUserID((String) request.getSession().getAttribute("name"))) != 0) {
+		int auth = edi.checkAthority(edi.getUserID((String) request.getSession().getAttribute("name")));
+		if (auth == 1 || auth == 3) {
 			request.getRequestDispatcher("supHomeSubmit.html").forward(request, response);
+		} else if (auth == 2) {
+			request.getRequestDispatcher("DeptHomeSubmit.html").forward(request, response);
 		} else {
 			request.getRequestDispatcher("homeSubmit.html").forward(request, response);
 		}

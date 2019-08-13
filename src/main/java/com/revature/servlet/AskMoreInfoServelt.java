@@ -14,30 +14,38 @@ public class AskMoreInfoServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("In doPost of AskMoreInfoServlet");
-		if(request.getSession(false)==null) {
+		if (request.getSession(false) == null) {
 			response.sendRedirect("login.html");
 		}
-		RequestsDaoImipl rdi=new RequestsDaoImipl();
+		RequestsDaoImipl rdi = new RequestsDaoImipl();
 		System.out.println(request.getParameter("recind"));
-		int recid=Integer.parseInt(request.getParameter("recind"));
+		int recid = Integer.parseInt(request.getParameter("recind"));
 		String basic = request.getParameter("basicEmployee");
 		String sup = request.getParameter("DirectSuper");
 		String head = request.getParameter("DepartmentHead");
 		int auth = -1;
-		if(basic != null) {
+		if (basic != null) {
 			auth = 0;
-		}else if(sup != null) {
+		} else if (sup != null) {
 			auth = 1;
-		}else if(head != null) {
+		} else if (head != null) {
 			auth = 2;
 		}
 		rdi.updateFlagged(recid, auth);
-		
-		response.sendRedirect("supHomeAsk.html");
+
+		if (auth == 3 || auth == 1) {
+			response.sendRedirect("supHomeSubmit.html");
+		} else if (auth == 2) {
+			response.sendRedirect("DeptHomeSubmit.html");
+		} else {
+			response.sendRedirect("homeSubmit.html");
+		}
 	}
 
 }

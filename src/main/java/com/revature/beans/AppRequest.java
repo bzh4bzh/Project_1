@@ -25,12 +25,21 @@ public class AppRequest {
 	 */
 	private int status;
 	private String links;
+	private String finalGrade;
 
 	public AppRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getFinalGrade() {
+		return finalGrade;
+	}
+
+	public void setFinalGrade(String finalGrade) {
+		this.finalGrade = finalGrade;
+	}
+
 	public String getMoreInfo() {
 		return moreInfo;
 	}
@@ -59,12 +68,12 @@ public class AppRequest {
 			int gradingScale, String passingGrade, String justification, double cost, double reimbursement,
 			int requestId, String links, String moreInfo, int flagged) {
 		this(userID, name, location, date, description, type, gradingScale, passingGrade, justification, cost,
-				reimbursement, requestId, links, null,-1,0);
+				reimbursement, requestId, links, null,-1,null,0);
 	}
 
 	public AppRequest(int userID, String name, String location, String date, String description, int type,
 			int gradingScale, String passingGrade, String justification, double cost, double reimbursement,
-			int requestId, String links,String moreInfo, int flagged, int status) {
+			int requestId, String links,String moreInfo, int flagged,String finalGrade, int status) {
 		super();
 		this.userID = userID;
 		this.name = name;
@@ -82,6 +91,8 @@ public class AppRequest {
 		this.links = links;
 		this.flagged = flagged;
 		this.moreInfo = moreInfo;
+		this.finalGrade = finalGrade;
+		
 	}
 
 	public double getReimbursement() {

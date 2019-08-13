@@ -75,7 +75,7 @@ div {
 </head>
 <body>
 	<ul>
-		<li><a class="supHome" href="supHome.html">Home</a></li>
+		<li><a class="supHome" href="DeptHome.html">Home</a></li>
 		<li>
 			<form method="post" action="supHome">
 				<button class="supHome" type="submit" onclick=getTables()>Approve/Deny
@@ -86,11 +86,6 @@ div {
 			<form method="post" action="notification">
 				<button class="supHome" type="submit" onclick=getNotifTables()>View
 					Notifications</button>
-			</form>
-		</li>
-		<li>
-			<form method="post" action="payout">
-				<button class="supHome" type="submit" onclick=getPayTables()>Pay Out</button>
 			</form>
 		</li>
 		<li>
@@ -129,7 +124,7 @@ div {
 	</div>
 </body>
 <script>
- 	alert("Submitted")
+alert("Submitted")
     function getTables() {
         console.log("gettingTables");
         let xhr = new XMLHttpRequest();
@@ -139,17 +134,6 @@ div {
             }
         };
         xhr.open("POST", "supHome", true);
-        xhr.send();
-    }
-    function getPayTables() {
-        console.log("gettingPayTables");
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                location.reload(true);
-            }
-        };
-        xhr.open("POST", "payout", true);
         xhr.send();
     }
     function getNotifTables() {

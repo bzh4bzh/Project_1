@@ -23,7 +23,7 @@ public class NotificationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("In doPost of NotificationServlet");
+		//System.out.println("In doPost of NotificationServlet");
 		if (request.getSession(false) == null) {
 			response.sendRedirect("login.html");
 		}
@@ -33,15 +33,15 @@ public class NotificationServlet extends HttpServlet {
 		int userid = edi.getUserID((String) request.getSession().getAttribute("name"));
 		int deptid = edi.getDeptID((String) request.getSession().getAttribute("name"));
 		int auth = edi.checkAthority(userid);
-		if(auth == 0) {
-		out.print(rdi.getMyPendingNotifications(userid));
-		}else if(auth == 1) {
-		out.print(rdi.getFlaggedSuper(userid));
-		}else if(auth == 2) {
-		out.print(rdi.getFlaggedDeptHead(deptid));
-		}else if(auth == 3) {
-		out.print(rdi.getApprovedBenCo());
+		if (auth == 0) {
+			out.print(rdi.getMyPendingNotifications(userid));
+		} else if (auth == 1) {
+			out.print(rdi.getFlaggedSuper(userid));
+		} else if (auth == 2) {
+			out.print(rdi.getFlaggedDeptHead(deptid));
+		} else if (auth == 3) {
+			out.print(rdi.getApprovedBenCo());
 		}
-		}
+	}
 
 }

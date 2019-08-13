@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("In doGet of LoginServlet");
 		RequestDispatcher rd = request.getRequestDispatcher("login.html");
 		rd.forward(request, response);
-		
+
 	}
 
 	/**
@@ -44,10 +44,10 @@ public class LoginServlet extends HttpServlet {
 
 		String name = request.getParameter("username");
 		name = (name == null) ? "" : name;
-		//System.out.println("username is |" + name);
+		// System.out.println("username is |" + name);
 		String password = request.getParameter("password");
 		password = (password == null) ? "" : password;
-		//System.out.println(edi.authenticate(name));
+		// System.out.println(edi.authenticate(name));
 		if (edi.authenticate(name) == null) {
 			request.getRequestDispatcher("invalidCredentials.html").forward(request, response);
 			out.print("<h1>sorry, username or password error!</h1>"); // its just password error
@@ -58,18 +58,10 @@ public class LoginServlet extends HttpServlet {
 			if (auth == -1) {
 				request.getRequestDispatcher("invalidCredentials.html").forward(request, response);
 				out.print("<h1>sorry, username or password error!</h1>"); // its just password error
-			} else if (auth >= 1) {
-//				//prints out pending request for supervisor 
-//				String supName = (String)request.getSession().getAttribute("name");
-//				System.out.println("Supervisor name is:" + supName);
-//				int supID = edi.getUserID(supName);
-//				//System.out.println("Supervisor id is " + supID);
-//				//System.out.println(rdi.getPendingSuper(supID));
-//				
-//				
-//				//out.print(rdi.getPendingSuper(edi.getUserID((String)request.getSession().getAttribute("name"))));
-//				request.getRequestDispatcher("supHome.html").forward(request, response);
+			} else if (auth == 1 || auth == 3) {
 				request.getRequestDispatcher("supHome.html").forward(request, response);
+			} else if (auth == 2) {
+				request.getRequestDispatcher("DeptHome.html").forward(request, response);
 			} else {
 				request.getRequestDispatcher("home.html").forward(request, response);
 			}

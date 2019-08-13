@@ -27,13 +27,14 @@ public class DenyServlet extends HttpServlet {
 		System.out.println(request.getParameter("requestId"));
 		int recid=Integer.parseInt(request.getParameter("requestId"));
 		rdi.updateStatus( -1,recid);
-		if(edi.checkAthority(rdi.getUserId(recid)) == 0) {
-			response.sendRedirect("homeRejected.html");
-		}else {
-		response.sendRedirect("supHomeDenied.html");
+		int auth = edi.checkAthority(edi.getUserID((String) request.getSession().getAttribute("name")));
+		if (auth == 3 || auth == 1) {
+			response.sendRedirect("supHomeSubmit.html");
+		} else if (auth == 2) {
+			response.sendRedirect("DeptHomeSubmit.html");
+		} else {
+			response.sendRedirect("homeSubmit.html");
 		}
-		//RequestDispatcher rd = request.getRequestDispatcher("home.html");
-		//rd.forward(request, response);
 	}
 
 }

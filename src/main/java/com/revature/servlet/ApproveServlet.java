@@ -15,28 +15,45 @@ import com.revature.daoimpl.RequestsDaoImipl;
  */
 public class ApproveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("In doPost of ApproveServlet");
-		if(request.getSession(false)==null) {
+		if (request.getSession(false) == null) {
 			response.sendRedirect("login.html");
 		}
-		EmployeeDaoImpl edi=new EmployeeDaoImpl();
-		RequestsDaoImipl rdi=new RequestsDaoImipl();
-		int id=edi.getUserID((String)request.getSession().getAttribute("name"));
-		
-		System.out.println(request.getParameterMap().size());
-		int recid=Integer.parseInt(request.getParameter("requestId"));
-		System.out.println("requestID is " + recid);
-		rdi.updateStatus( edi.checkAthority(id),recid);
-		if(rdi.getApplicationStatus(recid)==3) {
+		EmployeeDaoImpl edi = new EmployeeDaoImpl();
+		RequestsDaoImipl rdi = new RequestsDaoImipl();
+		int id = edi.getUserID((String) request.getSession().getAttribute("name"));
+		int recid = Integer.parseInt(request.getParameter("requestId"));
+		int auth = edi.checkAthority(id);
+		if (rdi.getApplicationStatus(recid) == 4) {
+			rdi.updateStatus(5, recid);
 			int userid = rdi.getUserId(recid);
-			edi.updateRemainingBalance(userid, edi.getRemainingBalance(userid)-rdi.getRem(recid));
+			edi.updateRemainingBalance(userid, edi.getRemainingBalance(userid) - rdi.getRem(recid));
+			
+			if (auth == 3 || auth == 1) {
+				response.sendRedirect("supHomeSubmit.html");
+			} else if (auth == 2){
+				rdi.updateStatus(edi.checkAthority(id), recid);
+				response.sendRedirect("DeptHomeSubmit.html");
+			}else {
+				rdi.updateStatus(edi.checkAthority(id), recid);
+				response.sendRedirect("homeSubmit.html");
+			}
+			// RequestDispatcher rd = request.getRequestDispatcher("home.html");
+			// rd.forward(request, response);
+		} else {
+			if (auth == 3 || auth == 1) {
+				response.sendRedirect("supHomeSubmit.html");
+			} else if (auth == 2){
+				rdi.updateStatus(edi.checkAthority(id), recid);
+				response.sendRedirect("DeptHomeSubmit.html");
+			}else {
+				rdi.updateStatus(edi.checkAthority(id), recid);
+				response.sendRedirect("homeSubmit.html");
+			}
 		}
-		response.sendRedirect("supHomeApproved.html");
-		//RequestDispatcher rd = request.getRequestDispatcher("home.html");
-		//rd.forward(request, response);
-	}
 
+	}
 }
