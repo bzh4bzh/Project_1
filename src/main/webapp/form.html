@@ -172,7 +172,7 @@ City, State, ZIP" required></textarea>
                 userDate = userDate.split("-");
                 userDate = new Date(userDate[0], userDate[1] - 1, userDate[2], 0, 0, 0); //Months are zero-indexed
 
-                if (userDate - curDate <= 86400000 * 3) { //ms per day; 3 days before
+                if (userDate - curDate <= 86400000 * 7) { //ms per day; 7 days before
                     document.getElementById("submitButton").disabled = true;
                 } else {
                     document.getElementById("submitButton").disabled = false; //reenable in case it was disabled before
@@ -193,7 +193,7 @@ City, State, ZIP" required></textarea>
                 userDate = userDate.split("-");
                 userDate = new Date(userDate[0], userDate[1] - 1, userDate[2], 0, 0, 0); //Months are zero-indexed
 
-                if (userDate - curDate < 86400000 * 3) {
+                if (userDate - curDate < 86400000 * 7) {
                     document.getElementById("submitButton").disabled = true;
                     alert("Sorry, this submission is too late");
                     return false; //Should prevent non-javascript method of form submission

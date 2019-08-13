@@ -524,7 +524,7 @@ public class RequestsDaoImipl implements RequestsDao {
 		}
 		sb.append("</tbody></table></div>" + "<div>\r\n" + " <form method=\"post\" action=\"askmoreinfo\">\r\n"
 				+ "            <p>Request More Info</p>\r\n"
-				+ "            <input type=\"text\" id=\"recid\" name=\"recind\" placeholder=\"Insert Request Id\" />\r\n"
+				+ "            <input type=\"number\" min = 1 id=\"recid\" name=\"recind\" placeholder=\"Insert Request Id\" />\r\n"
 				+ "            \r\n"
 				+ "                <input type = \"submit\" class=\"moreInfo\" name=\"basicEmployee\" id=\"basicEmployee\" value=\"Employee\" onClick=\"moreInfo()\">\r\n"
 				+ "            \r\n"
@@ -578,7 +578,7 @@ public class RequestsDaoImipl implements RequestsDao {
 		}
 		sb.append("</tbody></table></div>" + "<div>\r\n" + " <form method=\"post\" action=\"askmoreinfo\">\r\n"
 				+ "            <p>Request More Info</p>\r\n"
-				+ "            <input type=\"text\" id=\"recid\" name=\"recind\" placeholder=\"Insert Request Id\" />\r\n"
+				+ "            <input type=\"number\" min = 1 id=\"recid\" name=\"recind\" placeholder=\"Insert Request Id\" />\r\n"
 				+ "            \r\n"
 				+ "                <input type = \"submit\" class=\"moreInfo\" name=\"basicEmployee\" id=\"basicEmployee\" value=\"Employee\" onClick=\"moreInfo()\">\r\n"
 				+ "            \r\n"
