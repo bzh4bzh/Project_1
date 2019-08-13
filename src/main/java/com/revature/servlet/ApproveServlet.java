@@ -33,6 +33,7 @@ public class ApproveServlet extends HttpServlet {
 			edi.updateRemainingBalance(userid, edi.getRemainingBalance(userid) - rdi.getRem(recid));
 			
 			if (auth == 3 || auth == 1) {
+				rdi.updateStatus(edi.checkAthority(id), recid);
 				response.sendRedirect("supHomeSubmit.html");
 			} else if (auth == 2){
 				rdi.updateStatus(edi.checkAthority(id), recid);
@@ -45,12 +46,13 @@ public class ApproveServlet extends HttpServlet {
 			// rd.forward(request, response);
 		} else {
 			if (auth == 3 || auth == 1) {
+				rdi.updateStatus(edi.checkAthority(id), recid);
 				response.sendRedirect("supHomeSubmit.html");
 			} else if (auth == 2){
-				rdi.updateStatus(edi.checkAthority(id), recid);
+				rdi.updateStatus(2, recid);
 				response.sendRedirect("DeptHomeSubmit.html");
 			}else {
-				rdi.updateStatus(edi.checkAthority(id), recid);
+				rdi.updateStatus(0, recid);
 				response.sendRedirect("homeSubmit.html");
 			}
 		}
