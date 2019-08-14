@@ -6,10 +6,9 @@ CREATE TABLE employee(
     reportsto NUMBER,
     department NUMBER,
     authority NUMBER, 
-    remainingBal number default 1000,
+    remainingBal number,
     CONSTRAINT authority_check CHECK (authority>=0 AND authority<4)
 );
-
 create table request(
     requestID number primary key,
     userID number,
@@ -24,53 +23,16 @@ create table request(
     eventcost number,
     reimbursment number,
     status number default 0, 
+    finalgrade varchar2(20),
+    moreinfo varchar2(1000),
     foreign key (userid) references employee(userid),
-    constraint check_status check (status>=-1 and status<4)
+    constraint check_status check (status>=-1 and status<=4)
 );
+--alter table request drop constraint check_status;
+--alter table request add constraint check_status check (status>=-1 and status<6);
 
-ALTER TABLE request
-ADD (
-  docs VARCHAR2(500)
-);
-
-ALTER TABLE request
-MODIFY (
-  flagged number default -1
-);
-
-
-create table title(
-    titleid number primary key,
-    titlename varchar2(20)
-);
-
-create table attachment(
-    userid number,
-    requestid number,
-    docs varchar2(500)
-);
-
-drop table attachment;
-
-create table department(
-    deptid number,
-    deptname varchar2(20)
-);
-
-create table eventType(
-    eventid number primary key,
-    eventtype varchar2(20),
-    reimbursePercent number
-);
-
-create table gradingScale(
-    gradeid number primary key,
-    gradename varchar2(10)
-);
-
+drop sequence recseq;
 create sequence recseq;
-
-select recseq.currval from dual;
 
 CREATE OR REPLACE TRIGGER recidmaker
 BEFORE INSERT ON request
